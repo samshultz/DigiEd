@@ -41,4 +41,4 @@ class BookAdmin(admin.ModelAdmin):
     )
 
     def get_price(self, instance):
-        return "N" + str(instance.price)
+        return "₦" + str(instance.price)

@@ -36,3 +36,7 @@ class ProductViewTest(TestCase):
             "/shop/{}/{}/".format(self.book.id, self.book.slug))
         self.assertEqual("shop/product_detail.html",
                          response.templates[0].name)
+    
+    # def test_category_list_in_product_list_page(self):
+    #     response = self.client.get("/shop/")
+    #     self.assertIn('books', response.context)
