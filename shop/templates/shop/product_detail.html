@@ -1,3 +1,8 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+{% block content %}
+  
+
 {% include './partials/breadcrumbs.html' %}
 <!-- single -->
 <div class="single">
@@ -26,7 +31,7 @@
 
                     });//]]>
                     </script>
-                    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+                    <script type="text/javascript" src="{% static 'shop/js/jquery-ui.min.js' %}"></script>
                  <!---->
             </div>
             {% include "./partials/categories.html" %}
@@ -43,8 +48,8 @@
             <div class="col-md-5 single-right-left animated wow slideInUp" data-wow-delay=".5s">
                 <div class="flexslider">
                     <ul class="slides">
-                        <li data-thumb="images/si.jpg">
-                            <div class="thumb-image"> <img src="images/si.jpg" data-imagezoom="true" class="img-responsive"> </div>
+                        <li data-thumb="{% static 'shop/images/si.jpg' %}">
+                            <div class="thumb-image"> <img src="{% static 'shop/images/si.jpg' %}" data-imagezoom="true" class="img-responsive"> </div>
                         </li>
                         <li data-thumb="images/si1.jpg">
                              <div class="thumb-image"> <img src="images/si1.jpg" data-imagezoom="true" class="img-responsive"> </div>
@@ -55,8 +60,8 @@
                     </ul>
                 </div>
                 <!-- flixslider -->
-                    <script defer src="js/jquery.flexslider.js"></script>
-                    <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" />
+                    <script defer src="{% static 'shop/js/jquery.flexslider.js' %}"></script>
+                    <link rel="stylesheet" href="{% static 'shop/css/flexslider.css' %}" type="text/css" media="screen" />
                     <script>
                     // Can also be used with $(document).ready()
                     $(window).load(function() {
@@ -375,3 +380,4 @@
     </div>
 </div>
 <!-- //single-related-products -->
+{% endblock content %}

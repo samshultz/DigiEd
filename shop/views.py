@@ -7,7 +7,7 @@ def product_list(request, category_slug=None):
 
     category = None
     categories = Category.objects.all()
-    books = Book.objects.filter()
+    books = Book.objects.all()
 
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)

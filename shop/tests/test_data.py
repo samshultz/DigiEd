@@ -16,7 +16,7 @@ def create_book_instance(title="Django By Example", price=2000, isbn="1234567890
 
     return Book.objects.create(
         category=category,
-        title="Django By Example",
+        title=title,
         author="Antonio Mele",
         image="/media/books/2018/07/19/517k0XB9ogL._SX302_BO1204203200_.jpg",
         book_file="ahk.pdf",

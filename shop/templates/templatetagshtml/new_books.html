@@ -1,0 +1,46 @@
+{% load static %}
+{% load humanize %}
+<div class="new-products animated wow slideInUp" data-wow-delay=".5s">
+    <h3>New Books</h3>
+    <div class="new-products-grids">
+        {% for book in new_books %}
+        <div class="new-products-grid">
+            <div class="new-products-grid-left">
+                <a href="{{ book.get_absolute_url }}">
+                    <img src="{{ book.image.url }}" alt=" " class="img-responsive" />
+                </a>
+            </div>
+            <div class="new-products-grid-right">
+                <h4>
+                    <a href="{{ book.get_absolute_url }}">{{ book.title }}</a>
+                </h4>
+                <div class="rating">
+                    <div class="rating-left">
+                        <img src="{% static 'shop/images/2.png' %}" alt=" " class="img-responsive">
+                    </div>
+                    <div class="rating-left">
+                        <img src="{% static 'shop/images/2.png' %}" alt=" " class="img-responsive">
+                    </div>
+                    <div class="rating-left">
+                        <img src="{% static 'shop/images/2.png' %}" alt=" " class="img-responsive">
+                    </div>
+                    <div class="rating-left">
+                        <img src="{% static 'shop/images/1.png' %}" alt=" " class="img-responsive">
+                    </div>
+                    <div class="rating-left">
+                        <img src="{% static 'shop/images/1.png' %}" alt=" " class="img-responsive">
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+                <div class="simpleCart_shelfItem new-products-grid-right-add-cart">
+                    <p>
+                        <span class="item_price">{% if book.price == 0.00 %}Free{% else %}₦{{ book.price|intcomma }}{% endif %}</span>
+                        <a class="item_add" href="#">{% if book.price == 0.00 %}download{% else %}add to cart{% endif %} </a>
+                    </p>
+                </div>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
