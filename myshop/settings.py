@@ -27,8 +27,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+    
+    # my apps
     'shop',
     'cart',
+    'orders',
+
+    # third party apps
     'taggit',
 ]
 
