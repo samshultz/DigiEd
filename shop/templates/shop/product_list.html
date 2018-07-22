@@ -34,7 +34,7 @@
 
                     });//]]>
                 </script>
-                <script type="text/javascript" src="{% static 'js/jquery-ui.min.js' %}"></script>
+                <script type="text/javascript" src="{% static 'shop/js/jquery-ui.min.js' %}"></script>
                 <!---->
             </div>
            
@@ -86,7 +86,7 @@
             <div class="products-right-grids-bottom">
                 <div class="col-md-4 products-right-grids-bottom-grid">
                     {% for book in  books|slice:":3" %}
-                       {% include './partials/list_item.html' with book=book %}
+                       {% include './partials/list_item.html' with book=book cart_product_form=cart_product_form %}
                     {% endfor %}
                     
                 </div>

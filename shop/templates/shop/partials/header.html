@@ -1,4 +1,5 @@
 {% load static %}
+{% load humanize %}
 <!-- header -->
 <div class="header">
     <div class="container">
@@ -144,9 +145,9 @@
             </div>
             <div class="header-right">
                 <div class="cart box_1">
-                    <a href="checkout.html">
+                    <a href="{% url 'cart:cart_detail' %}">
                         <h3> <div class="total">
-                            <span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span> items)</div>
+                            <span class="">₦{{ cart.get_total_price|intcomma }}</span> (<span id="" class=""></span>{{ cart|length }} book{{ cart|length|pluralize }})</div>
                             <img src="{% static 'shop/images/bag.png' %}" alt="" />
                         </h3>
                     </a>

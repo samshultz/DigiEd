@@ -35,9 +35,11 @@
         
         <div class="simpleCart_shelfItem products-right-grid1-add-cart">
             <p>
-                <i>$325</i>
+                <!-- <i>$325</i> -->
+                
                 <span class="item_price">{% if book.price == 0.00 %}Free{% else %}₦{{ book.price|intcomma }}{% endif %}</span>
-                <a class="item_add" href="#">{% if book.price == 0.00 %}download{% else %}add to cart{% endif %} </a>
+                {% include "./add_to_cart_btn.html" with book=book cart_product_form=cart_product_form %}
+                <!-- <a class="item_add" href="#">{% if book.price == 0.00 %}download{% else %}add to cart{% endif %} </a> -->
             </p>
         </div>
     </div>

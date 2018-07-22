@@ -1,0 +1,75 @@
+{% extends "shop/base.html" %}
+{% block title %}
+    Checkout
+{% endblock title %}
+    
+{% block content %}
+<!-- breadcrumbs -->
+{% include 'shop/partials/breadcrumbs.html' %}
+<!-- //breadcrumbs -->
+<!-- checkout -->
+	<div class="checkout">
+		<div class="container">
+			<h3 class="animated wow slideInLeft" data-wow-delay=".5s">Your shopping cart contains: <span>{{ cart|length }} Books</span></h3>
+			<div class="checkout-right animated wow slideInUp" data-wow-delay=".5s">
+				<table class="timetable_sub">
+					<thead>
+						<tr>
+							<th>SL No.</th>	
+							<th>Product</th>
+							<th>Product Name</th>
+							<th>Price</th>
+							<th>Remove</th>
+						</tr>
+                    </thead>
+                    
+                    {% for item in cart %}
+                      
+                    {% with product=item.book %}
+					<tr class="rem{{ forloop.counter }}">
+                        
+						<td class="invert">{{ forloop.counter }}</td>
+						<td class="invert-image"><a href="{{ product.get_absolute_url }}"><img src="{{ product.image.url }}" alt=" " class="img-responsive" /></a></td>
+						
+						<td class="invert">{{ product.title }}</td>
+						<td class="invert">₦{{ product.price }}</td>
+						<td class="invert">
+							<div class="rem">
+								<a class="close close{{ forloop.counter }}" href="{% url 'cart:cart_remove' product.id %}"> </a>
+							</div>
+							<script>$(document).ready(function(c) {
+								$('.close{{ forloop.counter }}').on('click', function(c){
+									$('.rem{{ forloop.counter }}').fadeOut('slow', function(c){
+										$('.rem{{ forloop.counter }}').remove();
+									});
+									});	  
+								});
+						   </script>
+						</td>
+                    </tr>
+                    {% endwith %}
+                    {% endfor %}
+					
+				</table>
+			</div>
+			<div class="checkout-left">	
+				<div class="checkout-left-basket animated wow slideInLeft" data-wow-delay=".5s">
+					<h4>Continue to basket</h4>
+					<ul>
+                        {% for item in cart %}
+                          
+                        <li>{{ item.book.title|truncatewords:3 }} <i>-</i> <span>₦{{ item.book.price }} </span></li>
+                        {% endfor %}
+						
+						<li><b>Total</b> <i>-</i> <span>₦{{ cart.get_total_price }}</span></li>
+					</ul>
+				</div>
+				<div class="checkout-right-basket animated wow slideInRight" data-wow-delay=".5s">
+					<a href="single.html"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>Continue Shopping</a>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+		</div>
+	</div>
+<!-- //checkout -->
+{% endblock content %}

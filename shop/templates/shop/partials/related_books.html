@@ -1,0 +1,58 @@
+{% load humanize %}
+<div class="single-related-products">
+    <div class="container">
+        <h3 class="animated wow slideInUp" data-wow-delay=".5s">Related Books</h3>
+        <!-- <p class="est animated wow slideInUp" data-wow-delay=".5s">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia 
+            deserunt mollit anim id est laborum.</p> -->
+        <div class="new-collections-grids">
+            {% for book in similar_books %}
+
+
+            <div class="col-md-3 new-collections-grid">
+                <div class="new-collections-grid1 animated wow slideInLeft" data-wow-delay=".5s">
+                    <div class="new-collections-grid1-image">
+                        <a href="{{ book.get_absolute_url }}" class="product-image">
+                            <img src="{{ book.image.url }}" alt=" " class="img-responsive">
+                        </a>
+                        <div class="new-collections-grid1-image-pos">
+                            <a href="{{ book.get_absolute_url }}">Quick View</a>
+                        </div>
+                        <div class="new-collections-grid1-right">
+                            <div class="rating">
+                                <div class="rating-left">
+                                    <img src="images/2.png" alt=" " class="img-responsive">
+                                </div>
+                                <div class="rating-left">
+                                    <img src="images/2.png" alt=" " class="img-responsive">
+                                </div>
+                                <div class="rating-left">
+                                    <img src="images/1.png" alt=" " class="img-responsive">
+                                </div>
+                                <div class="rating-left">
+                                    <img src="images/1.png" alt=" " class="img-responsive">
+                                </div>
+                                <div class="rating-left">
+                                    <img src="images/1.png" alt=" " class="img-responsive">
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>
+                        <a href="{{ book.get_absolute_url }}">{{ book.title }}</a>
+                    </h4>
+
+                    <div class="new-collections-grid1-left simpleCart_shelfItem">
+                        <p>
+                            <i></i>
+                            <span class="item_price">{% if book.price == 0.00 %}Free{% else %}₦{{ book.price|intcomma }}{% endif %}</span>
+                            {% include "./add_to_cart_btn.html" with book=book cart_product_form=cart_product_form %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>
