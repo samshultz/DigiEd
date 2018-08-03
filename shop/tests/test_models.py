@@ -1,14 +1,17 @@
 import datetime
-
+from django.db import IntegrityError
 from django.core.exceptions import ValidationError
 from django.test import TestCase
 from django.utils import timezone
+
+from mixer.backend.django import mixer
+from taggit.managers import TaggableManager
 
 from ..models import Book, Category
 from .test_data import create_book_instance
 
 
-class BookModelTest(TestCase):
+class TestBookModel(TestCase):
     def setUp(self):
         self.category = Category.objects.create(
             name="Web development",
@@ -66,6 +69,18 @@ class BookModelTest(TestCase):
         self.assertEqual(
             "/shop/{}/django-by-example/".format(book.id), book.get_absolute_url())
 
+    def test_name_attr_returns_title(self):
+        book = create_book_instance(title="New Book")
+        self.assertEqual(book.title, book.name)
+
+    def test_only_one_item_featured(self):
+        category1 = mixer.blend("shop.Category")
+        category2 = mixer.blend("shop.Category")
+        book1 = create_book_instance(featured=True, category=category1)
+        book2 = create_book_instance(featured=True, category=category2)
+        featured_books = Book.objects.filter(featured=True)
+        self.assertEqual(len(featured_books), 1)
+
 
 class CategoryModelTest(TestCase):
     def setUp(self):
@@ -80,4 +95,11 @@ class CategoryModelTest(TestCase):
         self.assertEqual("Applications Development", str(self.cat))
 
     def test_get_absolute_url(self):
-        self.assertEqual("/shop/applications-development/", self.cat.get_absolute_url())
+        self.assertEqual("/shop/applications-development/",
+                         self.cat.get_absolute_url())
+
+    def test_category_slug_is_unique(self):
+        with self.assertRaises(IntegrityError):
+            Category.objects.create(
+                name="Applications Development",
+                slug="applications-development")

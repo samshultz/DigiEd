@@ -1,0 +1,26 @@
+
+
+        <div class="new-collections-grids">
+            <div class="col-md-3 new-collections-grid">
+                    {% for book in  new_releases|slice:":2" %}
+                    {% include "shop/partials/new_listing.html" with book=book %}
+                {% endfor %}
+            </div>
+            <div class="col-md-3 new-collections-grid">
+                    {% for book in  new_releases|slice:"2:4" %}
+                    {% include "shop/partials/new_listing.html" with book=book %}
+                {% endfor %}
+            </div>
+            <div class="col-md-3 new-collections-grid">
+                    {% for book in  new_releases|slice:"4:6" %}
+                    {% include "shop/partials/new_listing.html" with book=book %}
+                {% endfor %}
+            </div>
+            <div class="col-md-3 new-collections-grid">
+                    {% for book in  new_releases|slice:"6:8" %}
+                {% include "shop/partials/new_listing.html" with book=book %}
+                {% endfor %}
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    

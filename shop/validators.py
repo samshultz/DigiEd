@@ -8,7 +8,7 @@ from django.core.exceptions import ValidationError
 def validate_isbn_len(value):
     """ Validates that the ISBN provided is either 10 or 13 characters long"""
     if value:
-        if len(value) < 10 or len(value) in (11, 12):
+        if len(value) < 10 or len(value) in (11, 12) or len(value) > 13:
             raise ValidationError('ISBN must be 10 or 13 characters long')
 
 def validate_price(value):

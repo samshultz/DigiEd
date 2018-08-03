@@ -1,4 +1,5 @@
 {% extends "shop/base.html" %}
+{% load humanize %}
 {% block title %}
     Checkout
 {% endblock title %}
@@ -32,7 +33,7 @@
 						<td class="invert-image"><a href="{{ product.get_absolute_url }}"><img src="{{ product.image.url }}" alt=" " class="img-responsive" /></a></td>
 						
 						<td class="invert">{{ product.title }}</td>
-						<td class="invert">₦{{ product.price }}</td>
+						<td class="invert">{% if product.featured %}₦{{ product.discount_price|intcomma }} {% else %}₦{{ product.price|intcomma }}{% endif %}</td>
 						<td class="invert">
 							<div class="rem">
 								<a class="close close{{ forloop.counter }}" href="{% url 'cart:cart_remove' product.id %}"> </a>
@@ -58,10 +59,10 @@
 					<ul>
                         {% for item in cart %}
                           
-                        <li>{{ item.book.title|truncatewords:3 }} <i>-</i> <span>₦{{ item.book.price }} </span></li>
+                        <li>{{ item.book.title|truncatewords:3 }} <i>-</i> <span>₦{% if item.book.featured %}{{ item.book.discount_price|intcomma }} {% else %}{{ item.book.price|intcomma }}{% endif %} </span></li>
                         {% endfor %}
 						
-						<li><b>Total</b> <i>-</i> <span>₦{{ cart.get_total_price }}</span></li>
+						<li><b>Total</b> <i>-</i> <span>₦{{ cart.get_total_price|intcomma }}</span></li>
 					</ul>
 					
 				</div>

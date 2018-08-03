@@ -1,0 +1,73 @@
+{% extends "shop/base.html" %}
+{% load humanize %}
+{% block title %}
+    Order Detail
+{% endblock title %}
+    
+{% block content %}
+<!-- breadcrumbs -->
+
+<div class="breadcrumbs">
+    <div class="container">
+        <ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
+            <li><a href="{% url 'home' %}"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a></li>
+            <li class="active">Order Detail</li>
+        </ol>
+    </div>
+</div>
+<!-- //breadcrumbs -->
+<!--typography-page -->
+
+<div class="typo">
+    <div class="container">
+            <div class="alert alert-success text-center">
+                There are {{ order.items.all|length }} item{{order.items.all|length|pluralize }} in this order.
+            </div>
+        <div class="typo-grids">
+        
+        <div class="grid_3 grid_4 animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
+            <div class="col-md-6">
+            <h3 class="hdg">Books in order</h3>
+            <div class="bs-example">
+                <table class="table">
+                    <tbody>
+                        
+                        {% if not order %}
+                            <p>No orders available.</p>
+                        {% endif %}
+                            
+                        {% for order in order.items.all %}
+                          
+                        
+                        <tr>
+                            <td><h4 id="h4.-bootstrap-heading">{{ order.book.name }}<a class="anchorjs-link" href="#h1.-bootstrap-heading"><span class="anchorjs-icon"></span></a></h1></td>
+                            <td class="type-info"><a href="{{ order.book.book_file.url }}" download="{{ order.book.book_file.url }}"><span class="label label-success">Download</span></a></td>
+                        </tr>
+                        {% endfor %}
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+                    
+                    
+                    <div class="col-md-6">
+                        <h3>Order Details</h3>
+                        <div class="list-group list-group-alternate"> 
+                            <a href="#" class="list-group-item"><span class="badge">₦{{ order.get_total_cost|intcomma }}</span> <i class="ti ti-email"></i> Total cost </a> 
+                            <a href="#" class="list-group-item"><span class="badge badge-primary">{{ order.id }}</span> <i class="ti ti-eye"></i> Order ID </a> 
+                            <a href="#" class="list-group-item"><span class="badge">{{ order.tx_ref }}</span> <i class="ti ti-headphone-alt"></i> Transaction Ref. </a> 
+                            <a href="#" class="list-group-item"><span class="badge">{{ order.first_name }}</span> <i class="ti ti-comments"></i> First Name </a> 
+                            <a href="#" class="list-group-item"><span class="badge badge-warning">{{ order.last_name }}</span> <i class="ti ti-bookmark"></i> Last Name </a> 
+                            <a href="#" class="list-group-item"><span class="badge badge-{% if order.paid %}success{% else %}danger{% endif %}">{{ order.paid }}</span> <i class="ti ti-bell"></i> Paid </a> 
+                        </div>
+                    </div>
+                   <div class="clearfix"> </div>
+               	
+        </div>
+        
+        </div>
+    </div>
+</div>
+<!-- //typography-page -->
+{% endblock content %}

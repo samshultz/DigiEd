@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://ogp.me/ns/fb#">
 <head>
 <title>{% block title %}{% endblock title %}</title>
 <!-- for-mobile-apps -->
@@ -29,14 +29,28 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- //timer -->
 <!-- animation-effect -->
 <link href="{% static 'shop/css/animate.min.css' %}" rel="stylesheet"> 
+<link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+<link rel="stylesheet" href="{% static 'shop/css/parsley.css' %}">
 <script src="{% static 'shop/js/wow.min.js' %}"></script>
 <script>
  new WOW().init();
 </script>
 <!-- //animation-effect -->
+{% block opengraph %}
+  
+{% endblock opengraph %}
 </head>
 	
 <body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.1';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
 {% include './partials/header.html' %}
 
 {% block content %}
@@ -44,5 +58,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 {% endblock content %}
 
 {% include './partials/footer.html' %}
+
+<script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+<script src="{% static 'shop/js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'shop/js/parsley.min.js' %}"></script>
 </body>
 </html>

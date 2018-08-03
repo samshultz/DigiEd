@@ -1,50 +1,54 @@
-{% extends 'shop/base.html' %} {% load humanize %} {% load static %} {% block title %} {{ book.title }} by {{ book.author
-}} {% endblock title %} {% block content %} {% include './partials/breadcrumbs.html' %}
+{% extends 'shop/base.html' %} 
+{% load humanize %} 
+{% load static %} 
+{% load ratings %} 
+{% load daguerre %}
+{% block title %} {{ book.title }} by {{ book.author }} 
+{% endblock title %} {% block content %}
+{% block opengraph %}
+    <meta property="og:url"           content="{{ request.build_absolute_uri }}" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="{{ book.title }} by {{ book.author }}" />
+    <meta property="og:description"   content="{{ book.description|truncatewords:30 }}" />
+    <meta property="og:image"         content="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{{ book.image.url }}" />
+    <meta property="og:image:width" content="1200"/>
+    <meta property="og:image:height" content="650"/>
+{% endblock opengraph %} 
+
+<div class="breadcrumbs">
+        <div class="container">
+            <ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
+                <li>
+                    <a href="{% url 'home' %}">
+                        <span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a>
+                </li>
+                <li>
+                    <a href="{% url 'shop:book_list' %}">
+                        <span class="glyphicon glyphicon-book" aria-hidden="true"></span>All Books</a>
+                </li>
+                <li class="active">{{ book.title }}</li>
+            </ol>
+        </div>
+    </div>
 <!-- single -->
 <div class="single">
     <div class="container">
         <div class="col-md-4 products-left">
-            <div class="filter-price animated wow slideInUp" data-wow-delay=".5s">
-                <h3>Filter By Price</h3>
-                <ul class="dropdown-menu1">
-                    <li>
-                        <a href="">
-                            <div id="slider-range"></div>
-                            <input type="text" id="amount" style="border: 0" />
-                        </a>
-                    </li>
-                </ul>
-                <script type='text/javascript'>//<![CDATA[ 
-                    $(window).load(function () {
-                        $("#slider-range").slider({
-                            range: true,
-                            min: 0,
-                            max: 100000,
-                            values: [10000, 60000],
-                            slide: function (event, ui) {
-                                $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
-                            }
-                        });
-                        $("#amount").val("$" + $("#slider-range").slider("values", 0) + " - $" + $("#slider-range").slider("values", 1));
-
-
-                    });//]]>
-                </script>
-                <script type="text/javascript" src="{% static 'shop/js/jquery-ui.min.js' %}"></script>
-                <!---->
-            </div>
+            
             {% include "./partials/categories.html" with categories=categories category=book.category %}
-
+            
+            {% if discount %}
             <div class="men-position animated wow slideInUp" data-wow-delay=".5s">
-                <a href="single.html">
-                    <img src="images/29.jpg" alt=" " class="img-responsive" />
+                <a href="">
+                    <img src="{% adjust discount.image 'fill' width=500 height=634 %}" alt=" " class="img-responsive" />
                 </a>
                 <div class="men-position-pos">
-                    <h4>Summer collection</h4>
+                    <h4>{{ discount.title }}</h4>
                     <h5>
-                        <span>55%</span> Flat Discount</h5>
+                        <span>{{ discount.percent_discount}}%</span> Flat Discount</h5>
                 </div>
             </div>
+            {% endif %}
         </div>
         <div class="col-md-8 single-right">
             <div class="col-md-5 single-right-left animated wow slideInUp" data-wow-delay=".5s">
@@ -73,21 +77,23 @@
             </div>
             <div class="col-md-7 detail single-right-left simpleCart_shelfItem animated wow slideInRight" data-wow-delay=".5s">
                 <h3>{{ book.title }}</h3>
+                
                 <h4>
-                    <span class="item_price">{% if book.price == 0.00 %}Free{% else %}₦{{ book.price|intcomma }}{% endif %}</h4>
+                    <span class="item_price">
+                        {% if book.price == 0.00 %}
+                            Free
+                        {% else %}
+                        ₦
+                        {% if book.featured %}
+                            {{ book.discount_price|intcomma }}
+                        {% else %}
+                            {{ book.price|intcomma }}
+                        {% endif %}
+                            
+                        
+                        {% endif %}</h4>
                 <div class="rating1">
-                    <span class="starRating">
-                        <input id="rating5" type="radio" name="rating" value="5">
-                        <label for="rating5">5</label>
-                        <input id="rating4" type="radio" name="rating" value="4">
-                        <label for="rating4">4</label>
-                        <input id="rating3" type="radio" name="rating" value="3" checked>
-                        <label for="rating3">3</label>
-                        <input id="rating2" type="radio" name="rating" value="2">
-                        <label for="rating2">2</label>
-                        <input id="rating1" type="radio" name="rating" value="1">
-                        <label for="rating1">1</label>
-                    </span>
+                    {% ratings book %}
                 </div>
                 <div class="description">
                     <h5>
@@ -107,8 +113,10 @@
                     </div>
                     <div class="social-right">
                         <ul class="social-icons">
-                            <li>
-                                <a href="#" class="facebook"></a>
+                            <li data-href="{{ request.build_absolute_uri }}" data-mobile-iframe="true">
+                                <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri|urlencode }}&amp;src=sdkpreparse" class="facebook"></a>
+                                
+                                
                             </li>
                             <li>
                                 <a href="#" class="twitter"></a>
@@ -131,9 +139,9 @@
                         <li role="presentation" class="active">
                             <a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Description</a>
                         </li>
-                        <li role="presentation">
+                        <!-- <li role="presentation">
                             <a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">Reviews(2)</a>
-                        </li>
+                        </li> -->
                         <li role="presentation">
                             <a href="#info1" role="tab" id="profile-tab" data-toggle="tab" aria-controls="info">Information</a>
                         </li>
@@ -144,7 +152,7 @@
                             <h5>"{{ book.title }}" Brief Description</h5>
                             <p>{{ book.description|linebreaks }}</p>
                         </div>
-                        <div role="tabpanel" class="tab-pane fade bootstrap-tab-text" id="profile" aria-labelledby="profile-tab">
+                        <!-- <div role="tabpanel" class="tab-pane fade bootstrap-tab-text" id="profile" aria-labelledby="profile-tab">
                             <div class="bootstrap-tab-text-grids">
                                 <div class="bootstrap-tab-text-grid">
                                     <div class="bootstrap-tab-text-grid-left">
@@ -195,7 +203,7 @@
                                     </form>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div role="tabpanel" class="tab-pane fade bootstrap-tab-text" id="info1" aria-labelledby="dropdown1-tab">
                             <p>
                                 <dl class="dl-horizontal">

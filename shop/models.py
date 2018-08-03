@@ -2,7 +2,7 @@ import datetime
 import os
 
 from django.core.exceptions import ValidationError
-from django.core.validators import FileExtensionValidator
+from django.core.validators import FileExtensionValidator, MinValueValidator
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
@@ -19,6 +19,7 @@ ALLOWED_EXTENSIONS = ['pdf']
 class Category(models.Model):
 
     name = models.CharField(max_length=200, db_index=True)
+    description = models.TextField(max_length=200, default="")
     slug = models.SlugField(max_length=200,
                             db_index=True,
                             unique=True)
@@ -30,11 +31,11 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
-    
+
     def get_absolute_url(self):
         return reverse("shop:product_list_by_category", kwargs={"category_slug": self.slug})
-    
 
+    
 
 class Book(models.Model):
     category = models.ForeignKey(
@@ -43,6 +44,7 @@ class Book(models.Model):
     slug = models.SlugField(max_length=200, db_index=True)
     author = models.CharField(max_length=200, db_index=True)
     image = models.ImageField(upload_to='books/%Y/%m/%d')
+    featured = models.BooleanField(default=False)
     book_file = models.FileField(
         upload_to='books/file/%Y/%m/%d', max_length=100,
         validators=[FileExtensionValidator(ALLOWED_EXTENSIONS,
@@ -50,7 +52,10 @@ class Book(models.Model):
     description = models.TextField(blank=True)
     price = models.DecimalField(
         max_digits=10, decimal_places=2, default=0, validators=[validate_price])
-
+    discount_price = models.DecimalField(max_digits=10, decimal_places=2,
+                                         default=0,
+                                         validators=[MinValueValidator(0, "Discount Price must be positive")
+                                         ])
     year = models.DateField(default=timezone.now, validators=[
                             validate_year_is_not_future])
     num_pages = models.IntegerField("Number of pages", default=100)
@@ -69,15 +74,13 @@ class Book(models.Model):
         index_together = (('id', 'slug'),)
 
     def clean(self):
-        _, ext = os.path.splitext(self.book_file.name)
         if self.isbn:
             if len(self.isbn) < 10 or len(self.isbn) in (11, 12):
                 raise ValidationError('ISBN must be 10 or 13 characters long')
         if self.price:
             if self.price < 0:
                 raise ValidationError("Price can't be negative")
-        if ext != ".pdf":
-            raise ValidationError("Only PDF files are allowed")
+        
         if self.year.year > datetime.date.today().year:
             raise ValidationError("Year cannot be in the future")
 
@@ -92,6 +95,11 @@ class Book(models.Model):
         self.clean()
         if not self.slug:
             self.slug = slugify(self.title)
+        if self.featured:
+            qs = Book.objects.filter(featured=True).exclude(pk=self.pk)
+            if qs.exists():
+                qs.update(featured=False)
+                
         super(Book, self).save(*args, **kwargs)  # Call the real save() method
 
     def get_absolute_url(self):

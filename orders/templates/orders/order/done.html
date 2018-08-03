@@ -1,0 +1,39 @@
+{% extends "shop/base.html" %} {% block title %} Payments {% endblock %} {% block content %}
+
+<div class="register">
+    <div class="container">
+        <h3 class="animated wow zoomIn" data-wow-delay=".5s">Checkout</h3>
+        
+        <p class="est animated wow zoomIn animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">
+            Click the button below to make payments</p>
+        <div class="login-form-grids">
+            <p>Thank you for your purchase. Click on the links below to download the various materials. <b>We've also sent a link to your email address click it to download at a future date</b></p>
+            <ul>
+                
+                <div class="categories animated wow slideInUp" data-wow-delay=".5s">
+                    
+                  
+                    <ul class="cate">
+                        {% for item in order.items.all %}
+                      <li>
+                            <a href="{{ item.book.book_file }}" download="{{ item.book.book_file }}">{{ item.book.name }}</a>
+                      </li>
+                        
+                        {% endfor %}
+                        
+                        
+                    </ul>
+                </div>
+                
+                </ul>
+            
+        </div>
+
+        <div class="register-home animated wow slideInUp" data-wow-delay=".5s">
+            <a href="{% url 'home' %}">Home</a>
+        </div>
+
+    </div>
+
+</div>
+{% endblock content %}

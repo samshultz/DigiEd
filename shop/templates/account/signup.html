@@ -1,0 +1,40 @@
+{% extends "shop/base.html" %} {% block title %} Signup {% endblock %} {% block content %}
+<!-- register -->
+<div class="register">
+		<div class="container">
+			<h3 class="animated wow zoomIn" data-wow-delay=".5s">Sign Up</h3>
+			<p class="est animated wow zoomIn" data-wow-delay=".5s">
+                    Already have an account? Then please <a href="{{ login_url }}"><b>sign in</b></a>
+            </p>
+			<div class="login-form-grids">
+				<h5 class="animated wow slideInUp" data-wow-delay=".5s">profile information</h5>
+				<form class="animated wow slideInUp" data-wow-delay=".5s" id="signup_form" method="post" action="{% url 'account_signup' %}" data-parsley-validate>
+                        {% csrf_token %}
+                        
+                        <label for="id_email" class="sr-only">E-mail:</label>
+                        <input type="email" placeholder="Email Address" name="email" id="id_email" required=" " >
+                    
+                        <label for="id_email2" class="sr-only">E-mail (again):</label>
+                        <input type="email" placeholder="E-mail address confirmation" name="email2" id="id_email2" required=" " data-parsley-equalto="#id_email">
+                        
+                        <label for="id_username" class="sr-only">Username:</label>
+                        <input type="text" placeholder="Username" name="username" maxlength="150" id="id_username" required=" " minlength="3">
+                        
+                        <label for="id_password1" class="sr-only">Password:</label>
+                        <input type="password" name="password1" id="id_password1" placeholder="Password" required=" " data-parsley-minlength="8">
+                        
+                        <label for="id_password2" class="sr-only">Password (again):</label>
+                        <input type="password" name="password2" id="id_password2" placeholder="Password confirmation" required=" " data-parsley-equalto="#id_password1">
+                        
+                        {% if redirect_field_value %}
+                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                        {% endif %}
+                        <input type="submit" value="Sign Up">
+				</form>
+				
+			</div>
+		</div>
+	</div>
+<!-- //register -->
+{% endblock content %}
+

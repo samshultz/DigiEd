@@ -1,0 +1,178 @@
+{% extends 'shop/base.html' %}
+{% load shop_tags %}
+{% load static %}
+{% load humanize %}
+{% load daguerre %}
+{% block title %}
+    DigiEd
+{% endblock title %}
+
+
+{% block content %}
+    
+<!-- banner -->
+	<div class="banner">
+		<div class="container">
+			<div class="banner-info animated wow zoomIn" data-wow-delay=".5s">
+				<!-- <h3>Free Online Shopping</h3>
+				<h4>Up to <span>50% <i>Off/-</i></span></h4> -->
+				<div class="wmuSlider example1">
+					<div class="wmuSliderWrapper">
+						<article style="position: absolute; width: 100%; opacity: 0;"> 
+							<div class="banner-wrap">
+								<div class="banner-info1">
+									<!-- <p>T-Shirts + Formal Pants + Jewellery + Cosmetics</p> -->
+								</div>
+							</div>
+						</article>
+						<article style="position: absolute; width: 100%; opacity: 0;"> 
+							<div class="banner-wrap">
+								<div class="banner-info1">
+									<!-- <p>Toys + Furniture + Lighting + Watches</p> -->
+								</div>
+							</div>
+						</article>
+						<article style="position: absolute; width: 100%; opacity: 0;"> 
+							<div class="banner-wrap">
+								<div class="banner-info1">
+									<!-- <p>Tops + Books & Media + Sports</p> -->
+								</div>
+							</div>
+						</article>
+					</div>
+				</div>
+					<script src="js/jquery.wmuSlider.js"></script> 
+					<script>
+						$('.example1').wmuSlider();         
+					</script> 
+			</div>
+		</div>
+	</div>
+<!-- //banner -->
+<!-- banner-bottom -->
+<div class="banner-bottom">
+		<div class="container"> 
+			<div class="banner-bottom-grids">
+				<div class="banner-bottom-grid-left animated wow slideInLeft" data-wow-delay=".5s">
+					<div class="grid">
+						<figure class="effect-julia">
+								
+							<img src="{% static 'shop/images/books.jpg' %}" alt="" class="img-responsive" height="426" width="388"/>
+							<figcaption>
+								<h3>Best <span>Store</span><i> for programming ebooks</i></h3>
+								<div>
+									<p>Learning programming has never been easier</p>
+									<p>with over {{ 16000|intcomma }} ebooks</p>
+									<p>and over a {{ 500|intcomma }} authors</p>
+								</div>
+							</figcaption>			
+						</figure>
+					</div>
+				</div>
+				<div class="banner-bottom-grid-left1 animated wow slideInUp" data-wow-delay=".5s">
+					
+					{% if discount %}
+						
+					<div class="banner-bottom-grid-left-grid left1-grid grid-left-grid1">
+						<div class="banner-bottom-grid-left-grid1">
+							<img src="{% adjust discount.image 'fill' width=640 height=345 %}" alt=" " class="img-responsive" />
+						</div>
+						<div class="banner-bottom-grid-left1-pos">
+							<p>Discount {{ discount.percent_discount }}%</p>
+						</div>
+					</div>
+					{% endif %}
+					<div class="banner-bottom-grid-left-grid left1-grid grid-left-grid1">
+						<div class="banner-bottom-grid-left-grid1">
+							<img src="{% static 'shop/images/2.jpg' %}" alt=" " class="img-responsive" />
+						</div>
+						<div class="banner-bottom-grid-left1-position">
+							<div class="banner-bottom-grid-left1-pos1">
+								<p>Latest New Collections</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="banner-bottom-grid-right animated wow slideInRight" data-wow-delay=".5s">
+					<div class="banner-bottom-grid-left-grid grid-left-grid1">
+						<div class="banner-bottom-grid-left-grid1">
+							<img src="{% static 'shop/images/3.jpg' %}" alt=" " class="img-responsive" />
+						</div>
+						<div class="grid-left-grid1-pos">
+							<p>top and classic programming <span>ebooks</span></p>
+						</div>
+					</div>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+		</div>
+	</div>
+<!-- //banner-bottom -->
+<!-- collections -->
+	<div class="new-collections">
+		<div class="container">
+			<h3 class="animated wow zoomIn" data-wow-delay=".5s">New Collections</h3>
+		
+					{% show_new_releases 8 %}
+				<div class="clearfix"> </div>
+			
+		</div>
+	</div>
+<!-- //collections -->
+<!-- new-timer -->
+	<div class="timer">
+		<div class="container">
+			<div class="timer-grids">
+				<div class="col-md-8 timer-grid-left animated wow slideInLeft" data-wow-delay=".5s">
+					<h3><a href="{{ featured.get_absolute_url }}">{{ featured.title }}</a></h3>
+					
+					<div class="new-collections-grid1-left simpleCart_shelfItem timer-grid-left-price">
+						<p><i>₦{{ featured.price|intcomma }}</i> <span class="item_price">₦{{ featured.discount_price|intcomma }}</span></p>
+						<h4>{{ featured.description|truncatewords:100 }}</h4>
+						<p>
+								{% include "shop/partials/add_to_cart_btn.html" with book=featured cart_product_form=cart_product_form %}
+						</p>
+					</div>
+					<div id="counter"> </div>
+					<script src="js/jquery.countdown.js"></script>
+					<script src="js/script.js"></script>
+				</div>
+				<div class="col-md-4 timer-grid-right animated wow slideInRight" data-wow-delay=".5s">
+					<div class="timer-grid-right1">
+						<img src="{{ featured.image.url }}" alt=" " class="img-responsive" />
+						<div class="timer-grid-right-pos">
+							<h4>Special Offer</h4>
+						</div>
+					</div>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+		</div>
+	</div>
+<!-- //new-timer -->
+<!-- collections-bottom -->
+	<div class="collections-bottom">
+		<div class="container">
+			<div class="collections-bottom-grids">
+				<div class="collections-bottom-grid animated wow slideInLeft" data-wow-delay=".5s">
+					<h3>45% Offer For <span>Women & Children's Subscription</span></h3>
+				</div>
+			</div>
+			<div class="newsletter animated wow slideInUp" data-wow-delay=".5s">
+				<h3>Newsletter</h3>
+				<p>Join us now to get all news and special offers.</p>
+				<form enctype="multipart/form-data" method="post" action="/newsletter/automate-boring-stuff-python/subscribe/">
+					{% csrf_token %}
+					<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+					<input type="email" name="email_field" id="id_email_field" value="Enter your email address" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter your email address';}" required="">
+
+
+					<input type="submit" value="Subscribe" id="id_submit" name="submit">
+				</form>
+				
+			</div>
+		</div>
+	</div>
+
+<!-- //collections-bottom -->
+{% endblock content %}

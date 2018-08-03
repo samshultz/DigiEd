@@ -1,0 +1,19 @@
+{% load humanize %}
+{% load daguerre %}
+<div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
+        <div class="new-collections-grid1-image">
+            <a href="{{ book.get_absolute_url }}" class="product-image"><img src="{% adjust book.image 'fill' width=180 height=236 %}" alt=" " class="img-responsive" /></a>
+            <div class="new-collections-grid1-image-pos">
+                <a href="{{ book.get_absolute_url }}">Quick View</a>
+            </div>
+            
+        </div>
+        <h4><a href="{{ book.get_absolute_url }}">{{ book.title|truncatechars:20 }}</a></h4>
+        
+        <div class="new-collections-grid1-left simpleCart_shelfItem">
+            <p>
+                <!-- <i>$325</i>  -->
+                <span class="item_price">{% if book.price == 0.00 %}Free{% else %}₦{{ book.price|intcomma }}{% endif %}</span>
+                {% include "shop/partials/add_to_cart_btn.html" with book=book cart_product_form=cart_product_form %}</p>
+        </div>
+    </div>

@@ -1,4 +1,5 @@
 {% load humanize %}
+{% load daguerre %}
 <div class="single-related-products">
     <div class="container">
         <h3 class="animated wow slideInUp" data-wow-delay=".5s">Related Books</h3>
@@ -12,31 +13,12 @@
                 <div class="new-collections-grid1 animated wow slideInLeft" data-wow-delay=".5s">
                     <div class="new-collections-grid1-image">
                         <a href="{{ book.get_absolute_url }}" class="product-image">
-                            <img src="{{ book.image.url }}" alt=" " class="img-responsive">
+                            <img src="{% adjust book.image 'fill' width=180 height=236 %}" alt=" " class="img-responsive">
                         </a>
                         <div class="new-collections-grid1-image-pos">
                             <a href="{{ book.get_absolute_url }}">Quick View</a>
                         </div>
-                        <div class="new-collections-grid1-right">
-                            <div class="rating">
-                                <div class="rating-left">
-                                    <img src="images/2.png" alt=" " class="img-responsive">
-                                </div>
-                                <div class="rating-left">
-                                    <img src="images/2.png" alt=" " class="img-responsive">
-                                </div>
-                                <div class="rating-left">
-                                    <img src="images/1.png" alt=" " class="img-responsive">
-                                </div>
-                                <div class="rating-left">
-                                    <img src="images/1.png" alt=" " class="img-responsive">
-                                </div>
-                                <div class="rating-left">
-                                    <img src="images/1.png" alt=" " class="img-responsive">
-                                </div>
-                                <div class="clearfix"> </div>
-                            </div>
-                        </div>
+                        
                     </div>
                     <h4>
                         <a href="{{ book.get_absolute_url }}">{{ book.title }}</a>

@@ -1,0 +1,20 @@
+{% extends "shop/base.html" %} {% block title %} Sign Out {% endblock %} {% block content %}
+
+<div class="register">
+    <div class="container">
+        <h3 class="animated wow zoomIn" data-wow-delay=".5s">Sign Out</h3>
+        
+        
+        <div class="login-form-grids">
+            <p class="text-center"><b>Are you sure you want to sign out?</b></p>
+            <form method="post" action="{% url 'account_logout' %}">
+                {% csrf_token %} {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" /> {% endif %}
+                <input type="submit" value="Sign Out">
+            </form>
+        </div>
+
+    </div>
+
+</div>
+{% endblock content %}

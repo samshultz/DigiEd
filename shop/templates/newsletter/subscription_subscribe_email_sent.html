@@ -1,0 +1,21 @@
+{% extends "shop/base.html" %} {% block title %}Newsletter subscribe{% endblock title %} {% block content %}
+
+<div class="register">
+    <div class="container">
+        <h3 class="animated wow zoomIn" data-wow-delay=".5s">Newsletter</h3>
+        <p class="est animated wow zoomIn" data-wow-delay=".5s">
+            <b>subscribe {{ newsletter.title }}</b>
+        </p>
+        <div class="login-form-grids">
+            <p>
+                Your subscription request was successfully received and an activation email has been sent to you. In that email you will
+                find a link which you need to follow in order to activate your subscription.
+            </p>
+
+        </div>
+        <div class="register-home animated wow slideInUp" data-wow-delay=".5s">
+                <a href="{% url 'home' %}">Home</a>
+        </div>
+    </div>
+</div>
+{% endblock content %}

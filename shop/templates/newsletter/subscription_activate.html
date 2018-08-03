@@ -1,0 +1,28 @@
+{% extends "shop/base.html" %}
+
+{% block title %}
+Newsletter {{ newsletter.title }} {{ action }} activate
+{% endblock title %}
+
+{% block content %}
+
+<div class="register">
+        <div class="container">
+            <h3 class="animated wow zoomIn" data-wow-delay=".5s">Newsletter</h3>
+            <p class="est animated wow zoomIn" data-wow-delay=".5s"><b>{{ newsletter.title }} {{ action }} activate</b></p>
+            <div class="login-form-grids">
+                <form class="animated wow slideInUp" data-wow-delay=".5s" action="." method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <p><label for="id_name_field">Name:</label> 
+                    <input type="text" name="name_field" maxlength="30" id="id_name_field"> <span class="help-text">optional</span></p>
+                    <p><label for="id_email_field">e-mail:</label> <input type="email" name="email_field" value="" required="" id="id_email_field"></p>
+                    <input type="hidden" name="user_activation_code" value="{{ form.user_activation_code.value }}" required="" maxlength="40" id="id_user_activation_code">
+                    
+                    <input id="id_submit" name="submit" value="Activate" type="submit" />
+                </form>
+    
+            </div>
+            
+        </div>
+    </div>
+{% endblock content %}

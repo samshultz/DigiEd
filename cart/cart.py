@@ -21,9 +21,14 @@ class Cart(object):
         Add a product to the cart or update its quantity.
         """
         book_id = str(book.id)
+        if book.featured:
+            price = book.discount_price
+        else:
+            price = book.price
+
         if book_id not in self.cart:
             self.cart[book_id] = {
-                'quantity': 1, 'price': str(book.price)}
+                'quantity': 1, 'price': str(price)}
         # if update_quantity:
         #     self.cart[book_id]['quantity'] = quantity
         # else:

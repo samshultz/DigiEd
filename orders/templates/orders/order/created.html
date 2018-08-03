@@ -1,5 +1,33 @@
-{% extends "shop/base.html" %} {% block title %} Thank you {% endblock %} {% block content %}
-<h1>Thank you</h1>
-<p>Your order has been successfully completed. Your order number is
-    <strong>{{ order.id }}</strong>.</p>
-{% endblock %}
+{% extends "shop/base.html" %} {% block title %} Payments {% endblock %} {% block content %}
+<!-- {% load ravepay %} -->
+
+{% include 'shop/partials/breadcrumbs.html' %}
+<div class="register">
+    <div class="container">
+        <h3 class="animated wow zoomIn" data-wow-delay=".5s">Checkout</h3>
+        
+        <p class="est animated wow zoomIn animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">
+            Click the button below to make payments</p>
+        <div class="login-form-grids">
+            <p>You're almost done. Just <b>click</b> the button below to <b>pay</b> for your order.</p>
+            <form action="{% url 'orders:download' order.id %}" method="POST">
+                {% csrf_token %}
+                <script src="https://js.paystack.co/v1/inline.js" 
+                    data-key="pk_test_6d19b1035287fb78ec85b8eabb68b8aef75771cf" 
+                    data-email={{ order.email }} 
+                    data-amount={% widthratio cart.get_total_price 1 100 %} 
+                    data-ref={{ order.tx_ref }}
+                    >
+                    </script>
+            </form>
+            
+        </div>
+
+        <div class="register-home animated wow slideInUp" data-wow-delay=".5s">
+            <a href="index.html">Home</a>
+        </div>
+
+    </div>
+
+</div>
+{% endblock content %}

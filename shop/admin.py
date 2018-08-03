@@ -18,8 +18,8 @@ class BookAdmin(admin.ModelAdmin):
     list_editable = ('price',)
     prepopulated_fields = {'slug': ('title',)}
     search_fields = ('title', 'author', 'description')
-    date_hierarchy = 'created'
-    ordering = ('price', 'year')
+    date_hierarchy = 'year'
+    ordering = ('-created',)
     view_on_site = True
     fieldsets = (
         ("Basic Information", {
@@ -27,7 +27,7 @@ class BookAdmin(admin.ModelAdmin):
         }),
         ("Price Information", {
             'classes': ('collapse',),
-            "fields": ("price",)
+            "fields": ("price", 'discount_price')
         }),
         ("Files", {
             'classes': ('collapse',),
@@ -37,8 +37,9 @@ class BookAdmin(admin.ModelAdmin):
             'classes': ('collapse',),
             "fields": (('category', "tags"),"year", "num_pages", ("publisher", "isbn"),
                        "file_format", "slug")
+        }),
+        ("Featured", {
+            'classes': ('collapse',),
+            "fields": ("featured",)
         })
     )
-
-    def get_price(self, instance):
-        return "₦" + str(instance.price)
