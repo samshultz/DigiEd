@@ -1,10 +1,5 @@
-import datetime
-from django.db import IntegrityError
-from django.core.exceptions import ValidationError
 from django.test import TestCase
-from django.utils import timezone
 from ..forms import OrderCreateForm
-from mixer.backend.django import mixer
 # from taggit.managers import TaggableManager
 
 from shop.tests.test_data import create_book_instance

@@ -1,0 +1,213 @@
+{% extends 'shop/base.html' %}
+{% load shop_tags %}
+{% load static %}
+{% load humanize %}
+{% load daguerre %}
+{% block title %}
+    DigiEd
+{% endblock title %}
+
+
+{% block content %}
+    
+
+
+<!-- collections -->
+	 <div class="new-collections">
+		<div class="container">
+			<div class="alert alert-{% if total_results == 0 %}danger {% else %}success {% endif %} text-center">
+                    
+                {{ total_results }} result{{total_results|pluralize }} {% if total_results != 1 %}were {% else %} was {% endif %}found for your search.
+                
+            </div>
+		
+            <div class="new-collections-grids">
+                
+                    <div class="col-md-3 new-collections-grid">
+                            {% for book in  results|slice:":3" %}
+                            <div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
+                                    <div class="new-collections-grid1-image">
+                                        <a href="{{ book.url }}" class="product-image"><img src="{{ book.image }}" alt=" " class="img-responsive" /></a>
+                                        <div class="new-collections-grid1-image-pos">
+                                            <a href="{{ book.url }}">Quick View</a>
+                                        </div>
+                                        
+                                    </div>
+                                    <h4><a href="{{ book.url }}">{{ book.title|truncatechars:20 }}</a></h4>
+                                    
+                                    <div class="new-collections-grid1-left simpleCart_shelfItem">
+                                        <p>
+                                            <!-- <i>$325</i>  -->
+                                            <span class="item_price">{% if book.price == 0.00 %}Free{% else %}₦{{ book.price|intcomma }}{% endif %}</span>
+                                            {% if book.price == 0.00 %}
+                                            <a class="item_add" download="{{ book.download_link }}" href="{{ book.download_link }}">download</a>
+                                            {% else %}
+
+                                            <form action="{% url 'cart:cart_add' book.meta.id %}" method="post">
+                                                {% csrf_token %} {{ cart_product_form }}
+                                                <input class="btn" type="submit" value="ADD TO CART">
+                                            </form>
+
+                                            {% endif %}
+                                    </div>
+                                </div>
+                                
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-3 new-collections-grid">
+                            {% for book in  results|slice:"3:6" %}
+                            <div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
+                                    <div class="new-collections-grid1-image">
+                                        <a href="{{ book.url }}" class="product-image"><img src="{{ book.image }}" alt=" " class="img-responsive" /></a>
+                                        <div class="new-collections-grid1-image-pos">
+                                            <a href="{{ book.url }}">Quick View</a>
+                                        </div>
+                                        
+                                    </div>
+                                    <h4><a href="{{ book.url }}">{{ book.title|truncatechars:20 }}</a></h4>
+                                    
+                                    <div class="new-collections-grid1-left simpleCart_shelfItem">
+                                        <p>
+                                            <!-- <i>$325</i>  -->
+                                            <span class="item_price">{% if book.price == 0.00 %}Free{% else %}₦{{ book.price|intcomma }}{% endif %}</span>
+                                            
+                                            {% if book.price == 0.00 %}
+                                            <a class="item_add" download="{{ book.download_link }}" href="{{ book.download_link }}">download</a>
+                                            {% else %}
+
+                                            <form action="{% url 'cart:cart_add' book.meta.id %}" method="post">
+                                                {% csrf_token %} {{ cart_product_form }}
+                                                <input class="btn" type="submit" value="ADD TO CART">
+                                            </form>
+
+                                            {% endif %}
+                                    </div>
+                                </div>
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-3 new-collections-grid">
+                            {% for book in  results|slice:"6:9" %}
+                            <div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
+                                    <div class="new-collections-grid1-image">
+                                        <a href="{{ book.url }}" class="product-image"><img src="{{ book.image }}" alt=" " class="img-responsive" /></a>
+                                        <div class="new-collections-grid1-image-pos">
+                                            <a href="{{ book.url }}">Quick View</a>
+                                        </div>
+                                        
+                                    </div>
+                                    <h4><a href="{{ book.url }}">{{ book.title|truncatechars:20 }}</a></h4>
+                                    
+                                    <div class="new-collections-grid1-left simpleCart_shelfItem">
+                                        <p>
+                                            <!-- <i>$325</i>  -->
+                                            <span class="item_price">{% if book.price == 0.00 %}Free{% else %}₦{{ book.price|intcomma }}{% endif %}</span>
+                                            {% if book.price == 0.00 %}
+                                            <a class="item_add" download="{{ book.download_link }}" href="{{ book.download_link }}">download</a>
+                                            {% else %}
+
+                                            <form action="{% url 'cart:cart_add' book.meta.id %}" method="post">
+                                                {% csrf_token %} {{ cart_product_form }}
+                                                <input class="btn" type="submit" value="ADD TO CART">
+                                            </form>
+
+                                            {% endif %}
+                                    </div>
+                                </div>
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-3 new-collections-grid">
+                            {% for book in  results|slice:"9:12" %}
+                            <div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
+                                    <div class="new-collections-grid1-image">
+                                        <a href="{{ book.url }}" class="product-image"><img src="{{ book.image }}" alt=" " class="img-responsive" /></a>
+                                        <div class="new-collections-grid1-image-pos">
+                                            <a href="{{ book.url }}">Quick View</a>
+                                        </div>
+                                        
+                                    </div>
+                                    <h4><a href="{{ book.url }}">{{ book.title|truncatechars:20 }}</a></h4>
+                                    
+                                    <div class="new-collections-grid1-left simpleCart_shelfItem">
+                                        <p>
+                                            <!-- <i>$325</i>  -->
+                                            <span class="item_price">{% if book.price == 0.00 %}Free{% else %}₦{{ book.price|intcomma }}{% endif %}</span>
+                                            {% if book.price == 0.00 %}
+                                            <a class="item_add" download="{{ book.download_link }}" href="{{ book.download_link }}">download</a>
+                                            {% else %}
+
+                                            <form action="{% url 'cart:cart_add' book.meta.id %}" method="post">
+                                                {% csrf_token %} {{ cart_product_form }}
+                                                <input class="btn" type="submit" value="ADD TO CART">
+                                            </form>
+
+                                            {% endif %}
+                                    </div>
+                                </div>
+                        {% endfor %}
+                    </div>
+                    
+                    <div class="clearfix"> </div>
+                </div>
+				<div class="clearfix"> </div>
+			
+		</div>
+	</div>
+<!-- //collections -->
+
+{% with page_obj=results %}
+
+
+<nav class="numbering animated wow slideInRight" data-wow-delay=".5s">
+        <ul class="pagination paging">
+                {% if page_obj.has_previous %}
+            <li>
+                <a href="?q={{ query|urlencode }}&page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            {% else %}
+            <li class="disabled">
+                    <a href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            {% endif %}
+            {% if page_obj.number|add:'-4' > 1 %}
+        <li><a href="?q={{ query|urlencode }}&page={{ page_obj.number|add:'-5' }}">&hellip;</a></li>
+        {% endif %}
+        {% for i in page_obj.paginator.page_range %}
+        {% if page_obj.number == i %}
+        <li class="active">
+                <a href="#">{{ i }}
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+        {% elif i > page_obj.number|add:'-5' and i < page_obj.number|add:'5' %}
+        
+        <li>
+                <a href="?q={{ query|urlencode }}&page={{ i }}">{{ i }}</a>
+            </li>
+        {% endif %}
+        {% endfor %}
+        {% if page_obj.paginator.num_pages > page_obj.number|add:'4' %}
+        <li><a href="?q={{ query|urlencode }}&page={{ page_obj.number|add:'5' }}">&hellip;</a></li>
+        {% endif %}
+        {% if page_obj.has_next %}
+    
+    <li>
+            <a href="?q={{ query|urlencode }}&page={{ page_obj.next_page_number }}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    {% else %}
+    <li class="disabled">
+            <a href="" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+{% endif %}
+            
+        </ul>
+    </nav>
+    {% endwith %}
+{% endblock content %}

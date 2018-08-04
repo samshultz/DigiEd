@@ -3,11 +3,11 @@
 [x] Confirm payments in the backend
 [x] Create a redirect URL
 [x] Authentication
-[] Send mail containing a link to download page after successful payments
+[x] Send mail containing a link to download page after successful payments
 <!-- [] Require authentication when user clicks on the download url in the email -->
 [x] And display a page containing all books relating to order
 [] Create a page containing all orders by a user
 [x] Create a detail page for each order
 [] Make social share work
 [] Apply discount to total price in cart
-[] Add search functionality
+[x] Add search functionality

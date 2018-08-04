@@ -137,8 +137,8 @@
             <div class="logo-nav-right">
                 <div class="search-box">
                     <div id="sb-search" class="sb-search">
-                        <form>
-                            <input class="sb-search-input" placeholder="Enter your search term..." type="search" id="search">
+                        <form action="{% url 'search' %}">
+                            <input class="sb-search-input" placeholder="Search using book titles, publisher and authors" type="search" id="search" name="q">
                             <input class="sb-search-submit" type="submit" value="">
                             <span class="sb-icon-search"> </span>
                         </form>

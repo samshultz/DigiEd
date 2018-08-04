@@ -4,7 +4,7 @@ from django.core.paginator import EmptyPage
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.urls import reverse_lazy
 # from .test_data import test_data
-from ..views import product_detail, product_list, home
+from ..views import product_detail, product_list, home, search
 from .test_data import create_book_instance
 from mixer.backend.django import mixer
 pytestmark = pytest.mark.django_db
@@ -77,3 +77,14 @@ class TestProductView(TestCase):
         resp = home(req)
 
         self.assertEqual(resp.status_code, 200)
+
+    def test_search_view_existing_data(self):
+        resp = self.client.get(reverse_lazy("search"), data={"q": "Django"})
+        
+        self.assertEqual(resp.status_code, 200)
+        self.assertTemplateUsed(resp, "shop/search.html")
+        self.assertIn('results', resp.context)
+    
+    def test_search_view_with_get_data(self):
+        resp = self.client.get(reverse_lazy("search"), data={"q": "Django", "page": 10})
+        self.assertTrue(resp.context['results'])

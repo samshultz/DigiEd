@@ -10,7 +10,7 @@ from django.utils.text import slugify
 
 from taggit.managers import TaggableManager
 
-from .validators import (validate_isbn_len, validate_price,
+from .validators import (validate_isbn, validate_price,
                          validate_year_is_not_future)
 
 ALLOWED_EXTENSIONS = ['pdf']
@@ -61,7 +61,7 @@ class Book(models.Model):
     num_pages = models.IntegerField("Number of pages", default=100)
     publisher = models.CharField(max_length=100)
     isbn = models.CharField(
-        max_length=13, blank=True, null=True, validators=[validate_isbn_len])
+        max_length=13, blank=True, null=True, validators=[validate_isbn])
 
     file_format = models.CharField(max_length=10, default="PDF")
     tags = TaggableManager()
