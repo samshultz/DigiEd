@@ -1,7 +1,20 @@
-{% extends "shop/base.html" %} {% block title %} Payments {% endblock %} {% block content %}
+{% extends "shop/base.html" %} 
+{% load static %}
+{% block title %} Payments {% endblock %} {% block content %}
 <!-- {% load ravepay %} -->
 
-{% include 'shop/partials/breadcrumbs.html' %}
+<!-- breadcrumbs -->
+
+<div class="breadcrumbs">
+        <div class="container">
+            <ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
+                <li><a href="{% url 'home' %}"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a></li>
+                <li><a href="{% url 'cart:cart_detail' %}"><span class="" aria-hidden="true"><img src="{% static 'shop/images/bag.png' %}"></span>Cart</a></li>
+                <li class="active">Payments</li>
+            </ol>
+        </div>
+    </div>
+    <!-- //breadcrumbs -->
 <div class="register">
     <div class="container">
         <h3 class="animated wow zoomIn" data-wow-delay=".5s">Checkout</h3>
@@ -24,7 +37,7 @@
         </div>
 
         <div class="register-home animated wow slideInUp" data-wow-delay=".5s">
-            <a href="index.html">Home</a>
+            <a href="{% url 'home' %}">Home</a>
         </div>
 
     </div>

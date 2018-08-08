@@ -7,7 +7,7 @@
                     Already have an account? Then please <a href="{{ login_url }}"><b>sign in</b></a>
             </p>
 			<div class="login-form-grids">
-				<h5 class="animated wow slideInUp" data-wow-delay=".5s">profile information</h5>
+				
 				<form class="animated wow slideInUp" data-wow-delay=".5s" id="signup_form" method="post" action="{% url 'account_signup' %}" data-parsley-validate>
                         {% csrf_token %}
                         

@@ -4,7 +4,7 @@
         <h3 class="animated wow zoomIn" data-wow-delay=".5s">Checkout</h3>
         <p class="est animated wow zoomIn" data-wow-delay=".5s"><b>Fill out this form to checkout</b></p>
         <div class="login-form-grids">
-            <form class="animated wow slideInUp" data-wow-delay=".5s" action="." method="post">
+            <form class="animated wow slideInUp" data-wow-delay=".5s" action="{% url 'orders:order_create' %}" method="post">
                 {% csrf_token %}
                 <input type="text" placeholder="First Name..." required=" " name="{{ form.first_name.name }}">
                 <input type="text" placeholder="Last Name..." required=" " name="{{ form.last_name.name }}">

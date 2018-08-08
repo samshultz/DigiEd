@@ -1,5 +1,7 @@
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.conf import settings
-from django.shortcuts import get_object_or_404, render
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404, get_list_or_404, render
 
 from cart.cart import Cart
 from paystackapi.paystack import Paystack
@@ -7,30 +9,52 @@ from paystackapi.paystack import Paystack
 from .forms import OrderCreateForm
 from .models import Order, OrderItem
 from .tasks import order_created
+from .utils import create_order_items
 
 
 def order_create(request):
+    ctx = {}
     cart = Cart(request)
     if request.method == 'POST':
         form = OrderCreateForm(request.POST)
         if form.is_valid():
             order = form.save()
-            for item in cart:
-                OrderItem.objects.create(order=order,
-                                         book=item['book'],
-                                         price=item['price'],
-                                         quantity=item['quantity'])
-            # # clear the cart
-            # cart.clear()
-            return render(request,
-                          'orders/order/created.html',
-                          {'order': order,
-                           'cart': cart})
+            create_order_items(cart, order, OrderItem)
+
+            ctx['order'] = order
+            ctx['cart'] = cart
+            return render(request, 'orders/order/created.html', ctx)
     else:
-        form = OrderCreateForm()
-        return render(request,
-                      'orders/order/create.html',
-                      {'cart': cart, 'form': form})
+
+        if request.user.is_authenticated:
+            if request.user.first_name:
+                first_name = request.user.first_name
+            else:
+                first_name = request.user.username
+            
+            if request.user.last_name:
+                last_name = request.user.last_name
+            else:
+                last_name = request.user.username
+            
+            email = request.user.email
+            order = Order.objects.create(first_name=first_name,
+                                         last_name=last_name,
+                                         email=email)
+            create_order_items(cart, order, OrderItem)
+            ctx['order'] = order
+            return render(request, 'orders/order/created.html', ctx)
+
+        else:
+            return render(request, 'orders/order/checkout_options.html')
+
+
+def guest_checkout(request):
+    # display an order form
+    form = OrderCreateForm()
+    return render(request,
+                  'orders/order/create.html',
+                  {'form': form})
 
 
 def confirm_payment(request, order_id):
@@ -56,15 +80,28 @@ def confirm_payment(request, order_id):
                       {'status': status, "response": gateway_response})
 
 
+@login_required
 def order_list(request):
     # get all orders by a customer
-    # pass it to the context
-    # template_name = 'orders/order/order_list.html
-    pass
+    object_list = get_list_or_404(Order, email=request.user.email)
+    
+    paginator = Paginator(object_list, 20)
+    page = request.GET.get('page')
+    try:
+
+        orders = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer deliver the first page
+        orders = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range deliver last page of results
+        orders = paginator.page(paginator.num_pages)
+    return render(request, 'orders/order/order_list.html', {'orders': orders})
 
 
 def order_detail(request, order_id, tx_ref):
     order = get_object_or_404(Order, id=order_id, tx_ref=tx_ref)
-    
+
     return render(request, "orders/order/order_detail.html", {'order': order})
-    
+
+

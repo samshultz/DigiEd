@@ -8,6 +8,7 @@ class TestESBook(TestCase):
     def setUp(self):
         connections.create_connection(hosts=['localhost'], timeout=20)
 
+    
     def test_can_add_items_to_search_index(self):
         book = create_book_instance()
         ESBook.init(index="books")
@@ -21,5 +22,7 @@ class TestESBook(TestCase):
                      download_link=book.book_file.url
 
                      )
+        esp.delete(index="books")
         s = esp.save(index="books")
         self.assertTrue(s)
+        

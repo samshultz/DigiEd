@@ -1,3 +1,5 @@
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Count
 from django.shortcuts import get_object_or_404, render
@@ -6,7 +8,7 @@ from cart.forms import CartAddProductForm
 from elasticsearch_dsl import Search
 from elasticsearch_dsl.connections import connections
 from pages.models import DiscountSection
-from shop.forms import SearchForm
+from shop.forms import SearchForm, UserEditForm
 
 from .models import Book, Category
 
@@ -93,7 +95,7 @@ def search(request):
             results = results.hits
             total_results = len(results)
 
-            paginator = Paginator(results, 6)
+            paginator = Paginator(results, 12)
             page = request.GET.get('page')
             try:
 
@@ -108,4 +110,14 @@ def search(request):
                                                         'total_results': total_results,
                                                         'query': query,
                                                         "cart_product_form": cart_product_form})
-# http://127.0.0.1:8000/search/?q=O%27Reilly+Media%2C+Inc.&page=2
+
+
+@login_required
+def profile_view(request):
+    form = UserEditForm(instance=request.user, data=request.POST or None)
+    if form.is_valid():
+        form.save()
+        messages.success(request, 'Profile updated successfully')
+    else:
+        messages.error(request, 'Error updating your profile')
+    return render(request, 'account/profile.html', {'form': form})

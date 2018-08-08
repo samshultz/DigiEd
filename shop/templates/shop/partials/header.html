@@ -49,87 +49,37 @@
                     <ul class="nav navbar-nav">
                         
                         <li {% if menu == 'home' %}class="active"{% endif %}><a href="{% url 'home' %}" class="act">Home</a></li>	
-                        <!-- Mega Menu -->
-                        <!-- <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Products <b class="caret"></b></a>
-                            <ul class="dropdown-menu multi-column columns-3">
+                        
+                            
+                        </li>
+                        
+                        <li {% if menu == "shop" %}class="active"{% endif %}><a href="{% url 'shop:book_list' %}">All Books</a></li>
+                        <li><a href="mail.html">Mail Us</a></li>
+                        {% if request.user.is_authenticated %}
+                          <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account <b class="caret"></b></a>
+                            <ul class="dropdown-menu multi-column">
                                 <div class="row">
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-offset-1 col-sm-11">
                                         <ul class="multi-column-dropdown">
-                                            <h6>Men's Wear</h6>
-                                            <li><a href="products.html">Clothing</a></li>
-                                            <li><a href="products.html">Wallets</a></li>
-                                            <li><a href="products.html">Shoes</a></li>
-                                            <li><a href="products.html">Watches</a></li>
-                                            <li><a href="products.html">Accessories</a></li>
+                                            
+                                            <li><a href="{% url 'profile' %}">Profile</a></li>
+                                            <li><a href="{% url 'orders:order_list' %}">Orders</a></li>
+                                            <hr>
+                                            <li><a href="{% url 'account_logout' %}">Sign Out</a></li>
+                                            
                                         </ul>
                                     </div>
-                                    <div class="col-sm-4">
-                                        <ul class="multi-column-dropdown">
-                                            <h6>Women's Wear</h6>
-                                            <li><a href="products.html">Clothing</a></li>
-                                            <li><a href="products.html">Wallets,Bags</a></li>
-                                            <li><a href="products.html">Footwear</a></li>
-                                            <li><a href="products.html">Watches</a></li>
-                                            <li><a href="products.html">Accessories</a></li>
-                                            <li><a href="products.html">Jewellery</a></li>
-                                            <li><a href="products.html">Beauty & Grooming</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <ul class="multi-column-dropdown">
-                                            <h6>Kid's Wear</h6>
-                                            <li><a href="products.html">Kids Home Fashion</a></li>
-                                            <li><a href="products.html">Boy's Clothing</a></li>
-                                            <li><a href="products.html">Girl's Clothing</a></li>
-                                            <li><a href="products.html">Shoes</a></li>
-                                            <li><a href="products.html">Brand Stores</a></li>
-                                        </ul>
-                                    </div>
+                                    
+                                    
                                     <div class="clearfix"></div>
                                 </div>
                             </ul>
                         </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Furniture <b class="caret"></b></a>
-                            <ul class="dropdown-menu multi-column columns-3">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <ul class="multi-column-dropdown">
-                                            <h6>Home Collection</h6>
-                                            <li><a href="furniture.html">Cookware</a></li>
-                                            <li><a href="furniture.html">Sofas</a></li>
-                                            <li><a href="furniture.html">Dining Tables</a></li>
-                                            <li><a href="furniture.html">Shoe Racks</a></li>
-                                            <li><a href="furniture.html">Home Decor</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <ul class="multi-column-dropdown">
-                                            <h6>Office Collection</h6>
-                                            <li><a href="furniture.html">Carpets</a></li>
-                                            <li><a href="furniture.html">Tables</a></li>
-                                            <li><a href="furniture.html">Sofas</a></li>
-                                            <li><a href="furniture.html">Shoe Racks</a></li>
-                                            <li><a href="furniture.html">Sockets</a></li>
-                                            <li><a href="furniture.html">Electrical Machines</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <ul class="multi-column-dropdown">
-                                            <h6>Decorations</h6>
-                                            <li><a href="furniture.html">Toys</a></li>
-                                            <li><a href="furniture.html">Wall Clock</a></li>
-                                            <li><a href="furniture.html">Lighting</a></li>
-                                            <li><a href="furniture.html">Top Brands</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </ul>
-                        </li> -->
-                        <li {% if menu == "shop" %}class="active"{% endif %}><a href="{% url 'shop:book_list' %}">All Books</a></li>
-                        <li><a href="mail.html">Mail Us</a></li>
+                        
+                        {% endif %}
+                        
+                            
                     </ul>
                 </div>
                 </nav>

@@ -4,6 +4,7 @@ from .utils import transaction_reference_generator
 from django.core.validators import MinValueValidator
 from django.core.exceptions import ValidationError
 
+
 class Order(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
@@ -48,8 +49,9 @@ class OrderItem(models.Model):
         if self.price < 0:
             raise ValidationError("Prices can't be negative")
         if self.quantity < 0:
-            raise ValidationError("Quantity can't be negative") 
-    
+            raise ValidationError("Quantity can't be negative")
+
     def save(self, *args, **kwargs):
-       self.clean()
-       super(OrderItem, self).save(*args, **kwargs) # Call the real save() method
+        self.clean()
+        # Call the real save() method
+        super(OrderItem, self).save(*args, **kwargs)

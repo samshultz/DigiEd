@@ -1,0 +1,40 @@
+{% extends "shop/base.html" %}
+
+{% block title %}
+    Checkout Options
+{% endblock title %}
+
+
+{% block content %}
+    
+<!-- breadcrumbs -->
+
+<div class="breadcrumbs">
+        <div class="container">
+            <ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
+                <li><a href="{% url 'home' %}"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a></li>
+                <li class="active">Checkout Options</li>
+            </ol>
+        </div>
+    </div>
+    <!-- //breadcrumbs -->
+<div class="container">
+    <div class="typo-grids">
+<div class="grid_3 grid_5 animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
+    <h3>Checkout Options</h3>
+    <div class="well">
+        <h4><a href="{% url 'account_login' %}">Login</a>  or <a href="{% url 'account_signup' %}">Sign-up</a> to checkout (recommended)</h4>
+        <p style="font-size: 1.2em">
+            You won't have to fill out an order form anytime you want to
+            checkout. Also, Your orders are saved for future reference.
+        </p>
+    </div>
+    <div class="well">
+       <h4><a href="{% url 'orders:order_form' %}">Checkout as Guest</a></h4>
+       <p style="font-size: 1.2em">No login or signup required. Just fill out the order form to get your items.</p>
+    </div>
+    
+</div>
+</div>
+</div>
+{% endblock content %}

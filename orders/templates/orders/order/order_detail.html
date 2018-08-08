@@ -11,6 +11,8 @@
     <div class="container">
         <ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
             <li><a href="{% url 'home' %}"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a></li>
+            
+            <li><a href="{% url 'orders:order_list' %}"><span class="glyphicon glyphicon-list" aria-hidden="true"></span>Order list</a></li>
             <li class="active">Order Detail</li>
         </ol>
     </div>
@@ -20,9 +22,13 @@
 
 <div class="typo">
     <div class="container">
+            {% with total_items=order.items.all|length %}
+            
+            
             <div class="alert alert-success text-center">
-                There are {{ order.items.all|length }} item{{order.items.all|length|pluralize }} in this order.
+                There {% if total_items == 1 %}is{% else %}are{% endif %} {{ total_items }} item{{ total_items|pluralize }} in this order.
             </div>
+            {% endwith %}
         <div class="typo-grids">
         
         <div class="grid_3 grid_4 animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
@@ -41,7 +47,7 @@
                         
                         <tr>
                             <td><h4 id="h4.-bootstrap-heading">{{ order.book.name }}<a class="anchorjs-link" href="#h1.-bootstrap-heading"><span class="anchorjs-icon"></span></a></h1></td>
-                            <td class="type-info"><a href="{{ order.book.book_file.url }}" download="{{ order.book.book_file.url }}"><span class="label label-success">Download</span></a></td>
+                            {% if order.paid %}<td class="type-info"><a href="{{ order.book.book_file.url }}" download="{{ order.book.book_file.url }}"><span class="label label-success">Download</span></a></td>{% endif %}
                         </tr>
                         {% endfor %}
                         
@@ -51,18 +57,18 @@
         </div>
                     
                     
-                    <div class="col-md-6">
-                        <h3>Order Details</h3>
-                        <div class="list-group list-group-alternate"> 
-                            <a href="#" class="list-group-item"><span class="badge">₦{{ order.get_total_cost|intcomma }}</span> <i class="ti ti-email"></i> Total cost </a> 
-                            <a href="#" class="list-group-item"><span class="badge badge-primary">{{ order.id }}</span> <i class="ti ti-eye"></i> Order ID </a> 
-                            <a href="#" class="list-group-item"><span class="badge">{{ order.tx_ref }}</span> <i class="ti ti-headphone-alt"></i> Transaction Ref. </a> 
-                            <a href="#" class="list-group-item"><span class="badge">{{ order.first_name }}</span> <i class="ti ti-comments"></i> First Name </a> 
-                            <a href="#" class="list-group-item"><span class="badge badge-warning">{{ order.last_name }}</span> <i class="ti ti-bookmark"></i> Last Name </a> 
-                            <a href="#" class="list-group-item"><span class="badge badge-{% if order.paid %}success{% else %}danger{% endif %}">{{ order.paid }}</span> <i class="ti ti-bell"></i> Paid </a> 
-                        </div>
-                    </div>
-                   <div class="clearfix"> </div>
+        <div class="col-md-6">
+            <h3>Order Details</h3>
+            <div class="list-group list-group-alternate"> 
+                <a href="#" class="list-group-item"><span class="badge">₦{{ order.get_total_cost|intcomma }}</span> <i class="ti ti-email"></i> Total cost </a> 
+                <a href="#" class="list-group-item"><span class="badge badge-primary">{{ order.id }}</span> <i class="ti ti-eye"></i> Order ID </a> 
+                <a href="#" class="list-group-item"><span class="badge">{{ order.tx_ref }}</span> <i class="ti ti-headphone-alt"></i> Transaction Ref. </a> 
+                <a href="#" class="list-group-item"><span class="badge">{{ order.first_name }}</span> <i class="ti ti-comments"></i> First Name </a> 
+                <a href="#" class="list-group-item"><span class="badge badge-warning">{{ order.last_name }}</span> <i class="ti ti-bookmark"></i> Last Name </a> 
+                <a href="#" class="list-group-item"><span class="badge badge-{% if order.paid %}success{% else %}danger{% endif %}">{{ order.paid }}</span> <i class="ti ti-bell"></i> Paid </a> 
+            </div>
+        </div>
+        <div class="clearfix"> </div>
                	
         </div>
         

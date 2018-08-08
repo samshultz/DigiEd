@@ -3,12 +3,12 @@ from django.test import RequestFactory, TestCase
 from django.core.paginator import EmptyPage
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.urls import reverse_lazy
+from django.contrib.auth.models import User
 # from .test_data import test_data
 from ..views import product_detail, product_list, home, search
 from .test_data import create_book_instance
 from mixer.backend.django import mixer
 pytestmark = pytest.mark.django_db
-
 
 
 class TestProductView(TestCase):
@@ -42,7 +42,7 @@ class TestProductView(TestCase):
             "/shop/{}/{}/".format(self.book.id, self.book.slug))
         self.assertEqual("shop/product_detail.html",
                          response.templates[0].name)
-        
+
     def test_list_view_returns_correct_queryset_when_called_with_category_slug(self):
         category1 = mixer.blend("shop.Category")
         category2 = mixer.blend("shop.Category")
@@ -56,8 +56,8 @@ class TestProductView(TestCase):
         book8 = create_book_instance(category=category1)
         book9 = create_book_instance(category=category2)
         book10 = create_book_instance(category=category1)
-        
-        # when called with category slug 
+
+        # when called with category slug
         resp = self.client.get("/shop/{}/".format(category1.slug))
         # should contain only books from that category
         self.assertEqual(len(resp.context['books']), 6)
@@ -68,7 +68,7 @@ class TestProductView(TestCase):
         empty_pag = self.client.get("/shop/", {'page': 3})
         self.assertRaises(EmptyPage)
         self.assertEqual(len(empty_pag.context['books']), 2)
-    
+
     def test_home_view(self):
         req = self.factory.get("/")
         middleware = SessionMiddleware()
@@ -80,11 +80,32 @@ class TestProductView(TestCase):
 
     def test_search_view_existing_data(self):
         resp = self.client.get(reverse_lazy("search"), data={"q": "Django"})
-        
+
         self.assertEqual(resp.status_code, 200)
         self.assertTemplateUsed(resp, "shop/search.html")
         self.assertIn('results', resp.context)
-    
+
     def test_search_view_with_get_data(self):
-        resp = self.client.get(reverse_lazy("search"), data={"q": "Django", "page": 10})
+        resp = self.client.get(reverse_lazy("search"), data={
+                               "q": "Django", "page": 10})
         self.assertTrue(resp.context['results'])
+
+
+class TestProfileView(TestCase):
+    def test_redirect_for_anonymous_user(self):
+        resp = self.client.get(reverse_lazy('profile'))
+        self.assertEqual(resp.status_code, 302)
+
+    def test_user_detail_were_updated(self):
+        data = {'first_name': "kenneth", "last_name": "Lord",
+                'email': "jacob@gmail.com", "username": "jacob"}
+        c = self.client
+
+        User.objects.create_user(
+            username='jacob', email='jacob@gmail.com', password='top_secret')
+
+        c.login(username='jacob', password='top_secret')
+
+        c.post(reverse_lazy('profile'), data=data)
+        user = User.objects.first()
+        self.assertEqual(user.first_name, "kenneth")
