@@ -5,7 +5,8 @@ from django.contrib.sessions.middleware import SessionMiddleware
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 # from .test_data import test_data
-from ..views import product_detail, product_list, home, search
+from ..views import home
+from django.http import Http404
 from .test_data import create_book_instance
 from mixer.backend.django import mixer
 pytestmark = pytest.mark.django_db
@@ -46,16 +47,16 @@ class TestProductView(TestCase):
     def test_list_view_returns_correct_queryset_when_called_with_category_slug(self):
         category1 = mixer.blend("shop.Category")
         category2 = mixer.blend("shop.Category")
-        book1 = create_book_instance(category=category1)
-        book2 = create_book_instance(category=category2)
-        book3 = create_book_instance(category=category1)
-        book4 = create_book_instance(category=category2)
-        book5 = create_book_instance(category=category1)
-        book6 = create_book_instance(category=category1)
-        book7 = create_book_instance(category=category2)
-        book8 = create_book_instance(category=category1)
-        book9 = create_book_instance(category=category2)
-        book10 = create_book_instance(category=category1)
+        create_book_instance(category=category1)
+        create_book_instance(category=category2)
+        create_book_instance(category=category1)
+        create_book_instance(category=category2)
+        create_book_instance(category=category1)
+        create_book_instance(category=category1)
+        create_book_instance(category=category2)
+        create_book_instance(category=category1)
+        create_book_instance(category=category2)
+        create_book_instance(category=category1)
 
         # when called with category slug
         resp = self.client.get("/shop/{}/".format(category1.slug))
@@ -91,12 +92,24 @@ class TestProductView(TestCase):
         self.assertTrue(resp.context['results'])
 
 
-class TestProfileView(TestCase):
+class TestProfileEdit(TestCase):
     def test_redirect_for_anonymous_user(self):
-        resp = self.client.get(reverse_lazy('profile'))
+        resp = self.client.get(reverse_lazy('profile_edit'))
         self.assertEqual(resp.status_code, 302)
+    
+    def test_view_with_get_request(self):
+        c = self.client
 
-    def test_user_detail_were_updated(self):
+        User.objects.create_user(
+            username='jacob', email='jacob@gmail.com', password='top_secret')
+
+        c.login(username='jacob', password='top_secret')
+
+        resp = c.get(reverse_lazy('profile_edit'))
+        self.assertEqual(resp.status_code, 200)
+
+
+    def test_user_detail_were_updated_with_valid_data(self):
         data = {'first_name': "kenneth", "last_name": "Lord",
                 'email': "jacob@gmail.com", "username": "jacob"}
         c = self.client
@@ -106,6 +119,56 @@ class TestProfileView(TestCase):
 
         c.login(username='jacob', password='top_secret')
 
-        c.post(reverse_lazy('profile'), data=data)
+        resp = c.post(reverse_lazy('profile_edit'), data=data)
         user = User.objects.first()
         self.assertEqual(user.first_name, "kenneth")
+        msgs = [msg for msg in resp.context['messages']]
+        self.assertEqual(str(msgs[0]), 'Profile updated successfully')
+        self.assertEqual(msgs[0].tags, 'success')
+    
+    def test_threw_an_error_with_invalid_data(self):
+        data = {'first_name': "kenneth", "last_name": "Lord"}
+        c = self.client
+
+        User.objects.create_user(
+            username='jacob', email='jacob@gmail.com', password='top_secret')
+
+        c.login(username='jacob', password='top_secret')
+
+        resp = c.post(reverse_lazy('profile_edit'), data=data)
+        user = User.objects.first()
+        self.assertFalse(user.first_name)
+        msgs = [msg for msg in resp.context['messages']]
+        self.assertEqual(str(msgs[0]), 'Error updating your profile')
+        self.assertEqual(msgs[0].tags, 'error')
+
+class TestProfileView(TestCase):
+    def test_redirect_for_anonymous_user(self):
+        resp = self.client.get(reverse_lazy('profile_view'))
+        self.assertEqual(resp.status_code, 302)
+    
+    def test_that_correct_template_was_used(self):
+        c = self.client
+
+        User.objects.create_user(
+            username='jacob', email='jacob@gmail.com', password='top_secret')
+
+        c.login(username='jacob', password='top_secret')
+
+        resp = c.get(reverse_lazy('profile_view'))
+        self.assertTemplateUsed(resp, "account/profile_view.html")
+
+    
+    def test_that_contains_correct_keys(self):
+        c = self.client
+
+        User.objects.create_user(
+            username='jacob', email='jacob@gmail.com', password='top_secret')
+
+        c.login(username='jacob', password='top_secret')
+
+        resp = c.get(reverse_lazy('profile_view'))
+        self.assertIn('user', resp.context)
+        self.assertIn('profile_upto_date', resp.context)
+        self.assertEqual(type(resp.context['profile_upto_date']), bool)
+        self.assertEqual(type(resp.context['user']), User)

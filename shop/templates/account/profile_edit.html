@@ -1,0 +1,46 @@
+{% extends "shop/base.html" %}
+{% load socialaccount %}
+
+{% block title %}
+    Profile Edit
+{% endblock title %}
+
+
+{% block content %}
+
+<div class="register">
+    <div class="container">
+        <h3 class="animated wow zoomIn" data-wow-delay=".5s">Profile</h3>
+        <p class="est animated wow zoomIn" data-wow-delay=".5s">View/Edit Profile Information
+        </p>
+        
+         {% if messages %} {% for message in messages %}
+        <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} text-center">
+            {{ message|safe }}
+        </div>
+        {% endfor %} {% endif %}
+        
+            
+            
+        <div class="login-form-grids">
+            <h5 class="animated wow slideInUp" data-wow-delay=".5s">profile information</h5>
+            
+            <form class="animated wow slideInUp" data-wow-delay=".5s" id="signup_form" method="post" action="{% url 'profile_edit' %}" data-parsley-validate>
+                    {% csrf_token %}
+                    <label for="{{ form.username.pk }}" class="sr-only">Username:</label>
+                    <input type="text" placeholder="Enter your Username" value="{{ form.username.value }}" name="{{ form.username.name }}" maxlength="150" id="{{ form.username.pk }}" required=" " minlength="3">
+                    
+                    <label for="{{ form.first_name.pk }}" class="sr-only">First name:</label>
+                    <input type="text" placeholder="Enter your first name" value="{{ form.first_name.value }}" name="{{ form.first_name.name }}" maxlength="150" id="{{ form.first_name.pk }}" required=" " minlength="3">
+                    
+                    <label for="{{ form.last_name.pk }}" class="sr-only">Last name:</label>
+                    <input type="text" placeholder="Enter your last name" value="{{ form.last_name.value }}" name="{{ form.last_name.name }}" maxlength="150" id="{{ form.last_name.pk }}" required=" " minlength="3">
+                    
+                    <input type="submit" value="Update">
+            </form>
+            
+        </div>
+    </div>
+</div>
+<!-- //register -->
+{% endblock content %}

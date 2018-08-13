@@ -3,12 +3,13 @@ from mixer.backend.django import mixer
 from django.test import TestCase
 from .test_data import create_book_instance
 from elasticsearch_dsl.connections import connections
+from mock import MagicMock
+
 
 class TestESBook(TestCase):
     def setUp(self):
         connections.create_connection(hosts=['localhost'], timeout=20)
 
-    
     def test_can_add_items_to_search_index(self):
         book = create_book_instance()
         ESBook.init(index="books")
@@ -22,7 +23,8 @@ class TestESBook(TestCase):
                      download_link=book.book_file.url
 
                      )
-        esp.delete(index="books")
-        s = esp.save(index="books")
-        self.assertTrue(s)
         
+        esp.save = MagicMock(return_value=True)
+        s = esp.save(index="books")
+
+        self.assertTrue(s)

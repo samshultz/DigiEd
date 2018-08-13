@@ -1,17 +1,16 @@
+import pytest
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.contrib.sessions.middleware import SessionMiddleware
-from django.core.exceptions import ValidationError
-from django.db import IntegrityError
+from django.http import Http404
 from django.test import RequestFactory, TestCase
 from django.urls import reverse_lazy
-from django.http import Http404
-import pytest
+
 from cart.cart import Cart
 from mixer.backend.django import mixer
 from shop.tests.test_data import create_book_instance
 
-
-from ..views import cart_add, cart_remove, cart_detail
+from ..views import cart_add, cart_remove
 
 
 class TestCartAddView(TestCase):
@@ -84,3 +83,19 @@ class TestCartDetailView(TestCase):
     
     def test_cart_in_context(self):
         self.assertIn('cart', self.resp.context)
+    
+    def test_profile_update_return_bool_for_auth_user(self):
+        c = self.client
+
+        User.objects.create_user(
+            username='jacob', email='jacob@gmail.com', password='top_secret')
+        c.login(username='jacob', password='top_secret')
+        self.resp = c.get(reverse_lazy("cart:cart_detail"))
+        self.assertFalse(self.resp.context['profile_update'])
+
+
+    def test_profile_update_return_none_for_unauth_user(self):
+        
+        self.resp = self.client.get(reverse_lazy("cart:cart_detail"))
+        self.assertIsNone(self.resp.context['profile_update'])
+        

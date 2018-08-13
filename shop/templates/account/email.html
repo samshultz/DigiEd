@@ -1,0 +1,96 @@
+{% extends "shop/base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Account" %}{% endblock %}
+
+{% block content %}
+
+<div class="typo">
+		<div class="container">
+			<div class="typo-grids">
+                {% if messages %} {% for message in messages %}
+                <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} text-center">
+                    {{ message|safe }}
+                </div>
+                {% endfor %} {% endif %}
+			<div class="grid_3 grid_4 animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
+				<h3 class="hdg">Email Addresses</h3>
+				<div class="bs-example">
+                    <table class="table">
+                        <tbody>
+                            {% if user.emailaddress_set.all %}
+                            <p>{% trans 'The following e-mail addresses are associated with your account:' %}</p>
+                    
+                            <form action="{% url 'account_email' %}" class="email_list" method="post">
+                                {% csrf_token %}
+                                <fieldset class="blockLabels">
+                                    {% for emailaddress in user.emailaddress_set.all %}
+                                    
+                                    <tr>
+                                        <td>
+                                            <input id="email_radio_{{forloop.counter}}" type="radio" name="email" {% if emailaddress.primary or user.emailaddress_set.count == 1 %}checked="checked" {% endif %} value="{{emailaddress.email}}" />
+                                        <h3 id="h3.-bootstrap-heading">{{ emailaddress.email }}</h3>
+                                        </td>
+                                        <td class="type-info">{% if emailaddress.verified %}
+                                                <span class="verified">{% trans "Verified" %}</span>
+                                                {% else %}
+                                                <span class="unverified">{% trans "Unverified" %}</span>
+                                                {% endif %} {% if emailaddress.primary %}
+                                                <span class="primary">{% trans "Primary" %}</span>{% endif %}</td>
+                                    </tr>
+                                    {% endfor %}
+                                    <tr>
+                                        <td>
+                                            <div class="buttonHolder">
+                                                <button class="secondaryAction btn btn-primary" type="submit" name="action_primary"><span class="fas fa-map-marker-alt"> </span> {% trans 'Make Primary' %}</button>
+                                                <button class="secondaryAction btn btn-info" type="submit" name="action_send"><span class="fas fa-paper-plane"> </span> {% trans 'Re-send Verification' %}</button>
+                                                <button class="primaryAction btn btn-danger" type="submit" name="action_remove"><span class="fas fa-times"> </span> {% trans 'Remove' %}</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                    
+                    
+                                </fieldset>
+                            </form>
+                            {% else %}
+                            <p>
+                                <strong>{% trans 'Warning:'%}</strong> {% trans "You currently do not have any e-mail address set up. You should really
+                                add an e-mail address so you can receive notifications, reset your password, etc." %}</p>
+                    
+                            {% endif %}
+                    
+                        </tbody>
+                    </table>
+				</div>
+            </div>
+        </div>
+        <h2>{% trans "Add E-mail Address" %}</h2>
+
+    <form method="post" action="{% url 'account_email' %}" class="add_email">
+        {% csrf_token %}
+        <div class="input-group animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
+				<span class="input-group-addon " id="basic-addon1"><span class="fa fa-at"> </span></span>
+				<input type="email" class="form-control"name="email" size="30" required="" id="id_email" placeholder="E-mail address" aria-describedby="basic-addon1">
+			</div>
+        <button name="action_add" type="submit" class="btn btn-success" ><span class="fas fa-plus-circle"> </span> {% trans "Add E-mail" %}</button>
+    </form>
+    </div>
+    
+</div>
+            {% endblock %}
+{% block extra_js %}
+<script type="text/javascript">
+(function() {
+  var message = "{% trans 'Do you really want to remove the selected e-mail address?' %}";
+  var actions = document.getElementsByName('action_remove');
+  if (actions.length) {
+    actions[0].addEventListener("click", function(e) {
+      if (! confirm(message)) {
+        e.preventDefault();
+      }
+    });
+  }
+})();
+</script>
+{% endblock extra_js %}

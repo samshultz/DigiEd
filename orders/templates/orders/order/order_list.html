@@ -19,13 +19,20 @@
 </div>
 <!-- //breadcrumbs -->
 <div class="container">
+     
     <div class="typo-grids">
+        <br>
+            {% if request.user.is_authenticated %} {% if not profile_update %}
+            <div class="alert alert-danger text-center">
+                Your profile needs to be updated. Click
+                <a href="{% url 'profile_edit' %}">here</a> to update it.
+            </div>
+            
+            {% endif %} {% endif %}
         <div class="grid_3 grid_5 animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
             
             {% if orders %}
-                
-            
-                
+                 
             <div class="">
                 <p>Click on any of the order to view details</p>
                     <a href="#" class="list-group-item">
@@ -45,7 +52,7 @@
                 </div>
             </div>
             {% else %}
-            <p>You don't have any orders yet. Purchase an Item and come back to this page.</p>
+            <p class="text-center"><b>You don't have any orders yet. Purchase an Item and come back to this page.</b></p>
             {% endif %}
             {% include "shop/partials/pagination.html" with page_obj=orders %}
             <div class="clearfix"> </div>

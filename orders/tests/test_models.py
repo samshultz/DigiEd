@@ -17,7 +17,7 @@ class TestOrderModel(TestCase):
         self.assertEqual(Order.objects.count(), 1, "Should create Order")
 
     def test_str_representation(self):
-        order = mixer.blend(Order)
+        order = mixer.blend(Order, pk=1)
         self.assertEqual(str(order), "Order 1")
 
     def test_transaction_ref_was_filled_in(self):
@@ -51,11 +51,11 @@ class TestOrderItemModel(TestCase):
 
     def test_can_create_order_item(self):
         
-        order_item1 = mixer.blend(
+        mixer.blend(
             OrderItem, order=self.order, book=self.book, quantity=1, price=2000)
-        order_item2 = mixer.blend(
+        mixer.blend(
             OrderItem, order=self.order, book=self.book, quantity=1, price=2500)
-        order_item3 = mixer.blend(
+        mixer.blend(
             OrderItem, order=self.order, book=self.book, quantity=1, price=1000)
         self.assertEqual(OrderItem.objects.count(), 3)
     

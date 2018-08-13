@@ -6,6 +6,14 @@
 {% block title %} {{ book.title }} by {{ book.author }} 
 {% endblock title %} {% block content %}
 {% block opengraph %}
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.1&appId=234840864036426&autoLogAppEvents=1';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
     <meta property="og:url"           content="{{ request.build_absolute_uri }}" />
     <meta property="og:type"          content="website" />
     <meta property="og:title"         content="{{ book.title }} by {{ book.author }}" />
@@ -112,21 +120,20 @@
                         <p>Share On :</p>
                     </div>
                     <div class="social-right">
-                        <ul class="social-icons">
-                            <li data-href="{{ request.build_absolute_uri }}" data-mobile-iframe="true">
-                                <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri|urlencode }}&amp;src=sdkpreparse" class="facebook"></a>
+                            
+                            <ul class="social-icons">
+                                <li style="float:left" class="fb-share-button" data-href="{{ request.build_absolute_uri }}" data-layout="button_count" data-size="small" data-mobile-iframe="true">
+                                        <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri|urlencode }}&amp;src=sdkpreparse"
+                                            class="fb-xfbml-parse-ignore">Share</a>
+                                    </li>
+                                <li>
+                                    <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text={{ book.title|urlencode }}">
+                                        Tweet</a>
+                                </li>
                                 
                                 
-                            </li>
-                            <li>
-                                <a href="#" class="twitter"></a>
-                            </li>
-                            <li>
-                                <a href="#" class="g"></a>
-                            </li>
-                            <li>
-                                <a href="#" class="instagram"></a>
-                            </li>
+                                <li class="g-plus" data-action="share" data-href="{{ request.build_absolute_uri }}"></li>
+                            
                         </ul>
                     </div>
                     <div class="clearfix"> </div>

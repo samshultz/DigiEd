@@ -1,0 +1,127 @@
+{% extends "shop/base.html" %}
+{% load humanize %}
+{% load socialaccount %}
+{% block title %}
+    Profile for {{ user.username }}
+{% endblock title %}
+    
+{% block content %}
+<!-- breadcrumbs -->
+
+<div class="breadcrumbs">
+    <div class="container">
+        <ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
+            <li><a href="{% url 'home' %}"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a></li>
+            
+            <li class="active">{{ user.username }}</li>
+        </ol>
+    </div>
+</div>
+<!-- //breadcrumbs -->
+<!--typography-page -->
+
+<div class="typo">
+    <div class="container">
+            
+            {% if request.user.is_authenticated %}
+                
+                {% if not profile_upto_date %}
+                    <div class="alert alert-danger text-center">
+                        Your profile needs to be updated. Click
+                        <a href="{% url 'profile_edit' %}">here</a> to update it.
+                    </div>
+            
+                {% endif %}
+            {% endif %}
+        <div class="typo-grids">
+        
+        <div class="grid_3 grid_4 animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
+            <div class="col-md-6">
+            <h3 class="hdg">Social Accounts</h3>
+            <div class="bs-example">
+                <table class="table">
+                    <tbody>
+                        
+                            {% get_social_accounts user as accounts %}
+        
+                            {% if accounts %}
+                            
+                                {% for account in accounts %}
+                                <tr>
+                                    <td>
+                                        <a class="btn btn-social btn-{{ account }}">
+                                            <span class="fab fa-{{ account }}"></span>{{ account|title }}
+                                        </a>
+                                    </td>
+                                    
+                                </tr>
+                                {% endfor %}
+                                
+                                
+                            {% else %}
+                            <p>No social account configured yet. Click "Edit Social account" button below to add a social account</p>
+                            {% endif %}
+                            <tr>
+                                    <td>
+                                        
+                                    </td>
+                                    <td>
+                                        <a href="{% url 'socialaccount_connections' %}" style="font-size: 1.5em"><span class="label label-success">Add/Edit Social Accounts</span></a>
+                                    </td>
+                                    
+                                </tr>
+                            
+                    </tbody>
+                </table>
+            </div>
+        </div>
+                    
+                    
+        <div class="col-md-6">
+            <h3>Profile Information</h3>
+            <div class="list-group list-group-alternate">
+                <a href="#" class="list-group-item">
+                    <span class="badge">{{ user.username }}</span>
+                    <i class="ti ti-email"></i> Username 
+                </a>
+                <a href="#" class="list-group-item">
+                    <span class="badge badge-primary">{{ user.first_name }}</span>
+                    <i class="ti ti-eye"></i> First name 
+                </a>
+                <a href="#" class="list-group-item">
+                    <span class="badge">{{ user.last_name }}</span>
+                    <i class="ti ti-headphone-alt"></i> Last name 
+                </a>
+                <a href="{% url 'account_email' %}" class="list-group-item">
+                    <span class="badge">{{ user.email }}</span>
+                    <i class="ti ti-comments"></i> Email
+                    <span class="fas fa-edit"></span>
+                </a>
+                    
+                    <div>
+                        <div style="float: left">
+                        <a href="{% url 'account_change_password' %}"style="font-size: 1.5em">
+                        <span class="label label-info">
+                            <span class="fas fa-user-lock"></span> Change/Set password</span>
+                    </a>
+                    </div>
+                    <div>
+                        <a href="{% url 'profile_edit' %}" style="font-size: 1.5em">
+                        <span class="label label-success">
+                            <span class="fas fa-user-edit"></span> Edit Profile Info</span>
+                    </a>
+                    </div>
+                    </div>
+                
+            </div>
+
+        </div>
+        <div class="clearfix"> </div>
+               	
+        </div>
+        
+        </div>
+    </div>
+</div>
+<!-- //typography-page -->
+{% endblock content %}

@@ -11,6 +11,14 @@
 <!-- checkout -->
 	<div class="checkout">
 		<div class="container">
+			
+			 {% if request.user.is_authenticated %} {% if not profile_update %}
+			<div class="alert alert-danger text-center">
+				Your profile needs to be updated. Click
+				<a href="{% url 'profile_edit' %}">here</a> to update it.
+			</div>
+			
+			{% endif %} {% endif %}
 			<h3 class="animated wow slideInLeft" data-wow-delay=".5s">Your shopping cart contains: <span>{{ cart|length }} Books</span></h3>
 			<div class="checkout-right animated wow slideInUp" data-wow-delay=".5s">
 				<table class="timetable_sub">

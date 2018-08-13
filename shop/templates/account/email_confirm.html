@@ -1,0 +1,46 @@
+{% extends "shop/base.html" %}
+
+{% load i18n %}
+{% load account %}
+
+{% block title %}{% trans "Confirm E-mail Address" %}{% endblock %}
+
+
+{% block content %}
+
+
+<div class="register">
+    <div class="container">
+        <h3 class="animated wow zoomIn" data-wow-delay=".5s">E-mail confirmation</h3>
+        
+        
+        <div class="login-form-grids">
+            <p class="text-center"><b>Confirm E-mail Address</b></p>
+            
+
+            {% if confirmation %}
+
+            {% user_display confirmation.email_address.user as user_display %}
+
+            <p>{% blocktrans with confirmation.email_address.email as email %}Please confirm that <a href="mailto:{{ email }}">{{ email }}</a> is an e-mail address for user {{ user_display }}.{% endblocktrans %}</p>
+
+            <form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
+            {% csrf_token %}
+            <input type="submit" value="Confirm">
+            </form>
+
+            {% else %}
+
+            {% url 'account_email' as email_url %}
+
+            <p>{% blocktrans %}This e-mail confirmation link expired or is invalid. Please <a href="{{ email_url }}">issue a new e-mail confirmation request</a>.{% endblocktrans %}</p>
+
+            {% endif %}
+            
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

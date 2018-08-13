@@ -1,6 +1,5 @@
 from django.test import TestCase
 from django.core.management import call_command
-import sys
 
 
 class TestIndexDataCommand(TestCase):

@@ -15,6 +15,7 @@ from .utils import create_order_items
 def order_create(request):
     ctx = {}
     cart = Cart(request)
+    payment_public_key = settings.PAYSTACK_PUBLIC_KEY
     if request.method == 'POST':
         form = OrderCreateForm(request.POST)
         if form.is_valid():
@@ -23,20 +24,15 @@ def order_create(request):
 
             ctx['order'] = order
             ctx['cart'] = cart
+            ctx['payment_public_key'] = payment_public_key
+            
             return render(request, 'orders/order/created.html', ctx)
     else:
 
         if request.user.is_authenticated:
-            if request.user.first_name:
-                first_name = request.user.first_name
-            else:
-                first_name = request.user.username
-            
-            if request.user.last_name:
-                last_name = request.user.last_name
-            else:
-                last_name = request.user.username
-            
+            first_name = request.user.first_name or request.user.username
+            last_name = request.user.last_name or request.user.username
+
             email = request.user.email
             order = Order.objects.create(first_name=first_name,
                                          last_name=last_name,
@@ -83,8 +79,10 @@ def confirm_payment(request, order_id):
 @login_required
 def order_list(request):
     # get all orders by a customer
-    object_list = get_list_or_404(Order, email=request.user.email)
-    
+    object_list = Order.objects.filter(email=request.user.email)
+    user = request.user
+    profile_upto_date = all([user.email, user.first_name,
+                             user.last_name, user.username])
     paginator = Paginator(object_list, 20)
     page = request.GET.get('page')
     try:
@@ -96,12 +94,16 @@ def order_list(request):
     except EmptyPage:
         # If page is out of range deliver last page of results
         orders = paginator.page(paginator.num_pages)
-    return render(request, 'orders/order/order_list.html', {'orders': orders})
+    return render(request, 'orders/order/order_list.html',
+                  {'orders': orders,
+                   'profile_update': profile_upto_date})
 
 
 def order_detail(request, order_id, tx_ref):
     order = get_object_or_404(Order, id=order_id, tx_ref=tx_ref)
-
-    return render(request, "orders/order/order_detail.html", {'order': order})
-
-
+    profile_upto_date = None
+    if request.user.is_authenticated:
+        user = request.user
+        profile_upto_date = all([user.email, user.first_name,
+                             user.last_name, user.username])
+    return render(request, "orders/order/order_detail.html", {'order': order, 'profile_update': profile_upto_date})

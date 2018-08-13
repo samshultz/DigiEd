@@ -3,18 +3,17 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.sessions.middleware import SessionMiddleware
 
-from django.db import IntegrityError
 from django.http import Http404
 from django.test import RequestFactory, TestCase
 from django.urls import reverse_lazy
-from mock import patch
+from mock import patch, MagicMock
 
 from cart.cart import Cart
 from mixer.backend.django import mixer
 from shop.tests.test_data import create_book_instance
 
 from orders.models import Order, OrderItem
-from ..views import confirm_payment, order_create, order_detail, order_list
+from ..views import confirm_payment, order_create, order_detail
 
 
 class TestOrderCreateView(TestCase):
@@ -89,7 +88,7 @@ class TestOrderCreateView(TestCase):
 
 class TestConfirmPaymentView(TestCase):
     @patch("orders.views.Paystack")
-    def test_payment(self, mock_Paystack):
+    def test_payment_confirmed(self, mock_Paystack):
         order = mixer.blend(Order)
         req = RequestFactory().post(reverse_lazy(
             "orders:download", args=[order.id]))
@@ -100,11 +99,33 @@ class TestConfirmPaymentView(TestCase):
         book = create_book_instance()
         ct = Cart(req)
         ct.add(book)
-        mock_Paystack(secret_key=settings.PAYSTACK_SECRET_KEY).transaction.verify(reference=order.tx_ref).return_value = {
-            'data': {'status': 'success', 'amount': ct.get_total_price()}}
-        resp = confirm_payment(req, order.id)
+        mock_Paystack(secret_key=settings.PAYSTACK_SECRET_KEY).transaction.verify = MagicMock(return_value={
+            'data': {'status': 'success', 'amount': ct.get_total_price() * 100}})
 
-        self.assertEqual(resp.status_code, 200)
+        resp = confirm_payment(req, order.id)
+        updated_order = Order.objects.first()
+        self.assertTrue(updated_order.paid)
+
+    @patch("orders.views.Paystack")
+    def test_payment_payment_rejected(self, mock_Paystack):
+        order = mixer.blend(Order)
+        req = RequestFactory().post(reverse_lazy(
+            "orders:download", args=[order.id]))
+        middleware = SessionMiddleware()
+        middleware.process_request(req)
+        req.session.save()
+        # create a book instance and add it to cart
+        book = create_book_instance()
+        ct = Cart(req)
+        ct.add(book)
+        mock_Paystack(secret_key=settings.PAYSTACK_SECRET_KEY).transaction.verify = MagicMock(return_value={
+            'data': {'status': 'failed',
+                     'amount': ct.get_total_price() * 100,
+                     'gateway_response': "payment was not successful"}})
+
+        resp = confirm_payment(req, order.id)
+        updated_order = Order.objects.first()
+        self.assertFalse(updated_order.paid)
 
 
 class TestOrderDetailView(TestCase):
@@ -135,6 +156,18 @@ class TestOrderDetailView(TestCase):
         resp = self.client.get(reverse_lazy(
             "orders:order_detail", args=[order.id, order.tx_ref]))
         self.assertTrue(resp.context['order'])
+    
+    def test_order_detail_return_bool_for_profile_update_with_auth_user(self):
+        order = mixer.blend(Order)
+        c = self.client
+
+        User.objects.create_user(
+            username='jacob', email='jacob@gmail.com', password='top_secret')
+        c.login(username='jacob', password='top_secret')
+        resp = c.get(reverse_lazy(
+            "orders:order_detail", args=[order.id, order.tx_ref]))
+        self.assertFalse(resp.context['profile_update'])
+        
 
 
 class TestGuestCheckout(TestCase):

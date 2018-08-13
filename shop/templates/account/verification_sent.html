@@ -1,0 +1,30 @@
+{% extends "shop/base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Verify your E-mail Address" %}{% endblock %}
+
+
+{% block content %}
+
+
+<div class="register">
+    <div class="container">
+        <h3 class="animated wow zoomIn" data-wow-delay=".5s">E-mail Verification</h3>
+        
+        
+        <div class="login-form-grids">
+            <p class="text-center"><b>Verify Your E-mail Address</b></p>
+            
+
+
+            <p>{% blocktrans %}We have sent an e-mail to you for verification. Follow the link provided to finalize the signup process. Please contact us if you do not receive it within a few minutes.{% endblocktrans %}</p>
+
+            
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

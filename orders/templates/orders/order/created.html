@@ -26,7 +26,7 @@
             <form action="{% url 'orders:download' order.id %}" method="POST">
                 {% csrf_token %}
                 <script src="https://js.paystack.co/v1/inline.js" 
-                    data-key="pk_test_6d19b1035287fb78ec85b8eabb68b8aef75771cf" 
+                    data-key="{{ payment_public_key }}" 
                     data-email={{ order.email }} 
                     data-amount={% widthratio cart.get_total_price 1 100 %} 
                     data-ref={{ order.tx_ref }}

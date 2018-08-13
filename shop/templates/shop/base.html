@@ -6,8 +6,7 @@
 <!-- for-mobile-apps -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="Best Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 		function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- //for-mobile-apps -->
@@ -30,7 +29,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- animation-effect -->
 <link href="{% static 'shop/css/animate.min.css' %}" rel="stylesheet"> 
 <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+<link rel="stylesheet" href="{% static 'shop/css/bootstrap-social.css' %}">
 <link rel="stylesheet" href="{% static 'shop/css/parsley.css' %}">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 <script src="{% static 'shop/js/wow.min.js' %}"></script>
 <script>
  new WOW().init();
@@ -42,15 +43,43 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head>
 	
 <body>
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = 'https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.1';
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-</script>
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '234840864036426',
+        xfbml      : true,
+        version    : 'v3.1'
+      });
+    
+      FB.AppEvents.logPageView();
+    
+    };
+  
+    (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "https://connect.facebook.net/en_US/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+  </script>
+  
+  <script>window.twttr = (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0],
+        t = window.twttr || {};
+      if (d.getElementById(id)) return t;
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "https://platform.twitter.com/widgets.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    
+      t._e = [];
+      t.ready = function(f) {
+        t._e.push(f);
+      };
+    
+      return t;
+    }(document, "script", "twitter-wjs"));</script>
 {% include './partials/header.html' %}
 
 {% block content %}
@@ -62,5 +91,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
 <script src="{% static 'shop/js/jquery-3.3.1.min.js' %}"></script>
 <script src="{% static 'shop/js/parsley.min.js' %}"></script>
+{% block extra_js %}
+  
+{% endblock extra_js %}
+<!-- Place this tag in your head or just before your close body tag. -->
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+
 </body>
 </html>

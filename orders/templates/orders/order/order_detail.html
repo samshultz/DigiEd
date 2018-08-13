@@ -24,11 +24,23 @@
     <div class="container">
             {% with total_items=order.items.all|length %}
             
-            
             <div class="alert alert-success text-center">
                 There {% if total_items == 1 %}is{% else %}are{% endif %} {{ total_items }} item{{ total_items|pluralize }} in this order.
             </div>
             {% endwith %}
+            
+            {% if request.user.is_authenticated %}
+                
+            
+                
+             {% if not profile_update %}
+            <div class="alert alert-danger text-center">
+                Your profile needs to be updated. Click
+                <a href="{% url 'profile_edit' %}">here</a> to update it.
+            </div>
+            
+            {% endif %}
+            {% endif %}
         <div class="typo-grids">
         
         <div class="grid_3 grid_4 animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
@@ -42,11 +54,11 @@
                             <p>No orders available.</p>
                         {% endif %}
                             
-                        {% for order in order.items.all %}
+                        {% for item in order.items.all %}
                           
                         
                         <tr>
-                            <td><h4 id="h4.-bootstrap-heading">{{ order.book.name }}<a class="anchorjs-link" href="#h1.-bootstrap-heading"><span class="anchorjs-icon"></span></a></h1></td>
+                            <td><h4 id="h4.-bootstrap-heading">{{ item.book.name }}<a class="anchorjs-link" href="#h1.-bootstrap-heading"><span class="anchorjs-icon"></span></a></h1></td>
                             {% if order.paid %}<td class="type-info"><a href="{{ order.book.book_file.url }}" download="{{ order.book.book_file.url }}"><span class="label label-success">Download</span></a></td>{% endif %}
                         </tr>
                         {% endfor %}

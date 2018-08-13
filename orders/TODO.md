@@ -9,6 +9,8 @@
 [x] Create a page containing all orders by a user
 [x] paginate the order list page by 20
 [x] Create a detail page for each order
-[] Make social share work
-[] Apply discount to total price in cart
+[x] Make social share work
+<!-- [] Apply discount to total price in cart -->
 [x] Add search functionality
+[] Use external media storage as media upload channel
+[] Create an Email for the site

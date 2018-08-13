@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Count
 from django.shortcuts import get_object_or_404, render
-
+from django.contrib.auth.models import User
 from cart.forms import CartAddProductForm
 from elasticsearch_dsl import Search
 from elasticsearch_dsl.connections import connections
@@ -113,11 +113,25 @@ def search(request):
 
 
 @login_required
-def profile_view(request):
-    form = UserEditForm(instance=request.user, data=request.POST or None)
-    if form.is_valid():
-        form.save()
-        messages.success(request, 'Profile updated successfully')
+def profile_edit(request):
+    if request.method == "POST":
+        form = UserEditForm(instance=request.user, data=request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Profile updated successfully')
+        else:
+            messages.error(request, 'Error updating your profile')
     else:
-        messages.error(request, 'Error updating your profile')
-    return render(request, 'account/profile.html', {'form': form})
+        form = UserEditForm(instance=request.user)
+    return render(request, 'account/profile_edit.html', {'form': form})
+
+
+@login_required
+def profile_view(request):
+    user = get_object_or_404(User, email=request.user.email)
+
+    profile_upto_date = all([user.email, user.first_name,
+                             user.last_name, user.username])
+    return render(request, "account/profile_view.html",
+                  {'user': user,
+                   "profile_upto_date": profile_upto_date})

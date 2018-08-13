@@ -15,13 +15,11 @@
                     <li><i class="glyphicon glyphicon-log-out" aria-hidden="true"></i><a href="{% url 'account_logout' %}">Sign Out</a></li>
                    {% endif %}
                        
-                    
-                    
-                    
                 </ul>
             </div>
             <div class="header-grid-right animated wow slideInRight" data-wow-delay=".5s">
                 <ul class="social-icons">
+                        
                     <li><a href="#" class="facebook"></a></li>
                     <li><a href="#" class="twitter"></a></li>
                     <li><a href="#" class="g"></a></li>
@@ -63,7 +61,7 @@
                                     <div class="col-sm-offset-1 col-sm-11">
                                         <ul class="multi-column-dropdown">
                                             
-                                            <li><a href="{% url 'profile' %}">Profile</a></li>
+                                            <li><a href="{% url 'profile_view' %}">Profile</a></li>
                                             <li><a href="{% url 'orders:order_list' %}">Orders</a></li>
                                             <hr>
                                             <li><a href="{% url 'account_logout' %}">Sign Out</a></li>

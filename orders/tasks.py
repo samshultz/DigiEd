@@ -20,4 +20,3 @@ def order_created(order_id, tx_ref):
     mail_sent = send_mail(subject, message, 'admin@myshop.com', [order.email])
 
     return mail_sent
- 

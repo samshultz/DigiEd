@@ -1,7 +1,7 @@
 {% extends "shop/base.html" %}
 {% load i18n %}
 {% load account socialaccount %}
-
+{% providers_media_js %}
 {% block title %}
 Sign In
 {% endblock title %}
@@ -13,19 +13,17 @@ Sign In
         <div class="container">
             <h3 class="animated wow zoomIn" data-wow-delay=".5s">Login Form</h3>
             <p class="est animated wow zoomIn" data-wow-delay=".5s">
+                    {% get_providers as socialaccount_providers %}
                     {% if socialaccount_providers %}
                     <p>{% blocktrans with site.name as site_name %}Please sign in with one
-                    of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
-                    for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
+                    of your existing third party accounts. Or sign in below:{% endblocktrans %}</p>
                     
                     <div class="socialaccount_ballot">
                     
-                      <ul class="socialaccount_providers">
+                      <ul class="socialaccount_providers text-center">
                         {% include "socialaccount/snippets/provider_list.html" with process="login" %}
                       </ul>
-                    
-                      <div class="login-or">{% trans 'or' %}</div>
-                    
+                      <div class="h3 text-center">OR</div>
                     </div>
                     
                     {% include "socialaccount/snippets/login_extra.html" %}

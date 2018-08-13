@@ -1,0 +1,31 @@
+{% extends "shop/base.html" %} {% block title %} Signup {% endblock %} {% block content %}
+
+                        
+                        
+<!-- register -->
+<div class="register">
+		<div class="container">
+			<h3 class="animated wow zoomIn" data-wow-delay=".5s">Sign Up</h3>
+			<p class="est animated wow zoomIn" data-wow-delay=".5s">
+                    Already have an account? Then please <a href="{{ login_url }}"><b>sign in</b></a>
+            </p>
+			<div class="login-form-grids">
+				
+				<form class="animated wow slideInUp" data-wow-delay=".5s" id="signup_form" method="post" action="{% url 'socialaccount_signup' %}" data-parsley-validate>
+                        {% csrf_token %}
+                        
+                        {{ form.as_p }}
+                        {% if redirect_field_value %}
+                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                        {% endif %}
+                        <input type="submit" value="Sign Up">
+				</form>
+				
+			</div>
+		</div>
+	</div>
+<!-- //register -->
+{% endblock content %}
+
+
+

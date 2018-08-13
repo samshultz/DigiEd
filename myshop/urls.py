@@ -2,7 +2,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
-from shop.views import home, search, profile_view
+from shop.views import home, search, profile_edit, profile_view
 
 
 admin.site.site_header = 'DigiEd admin'
@@ -20,7 +20,8 @@ urlpatterns = [
     url(r'^daguerre/', include('daguerre.urls')),
     url(r'^newsletter/', include('newsletter.urls')),
     url(r'^accounts/', include('allauth.urls')),
-    url(r'^account/profile/$', profile_view, name="profile"),
+    url(r'^account/profile/$', profile_view, name="profile_view"),
+    url(r'^account/profile/edit/$', profile_edit, name="profile_edit"),
     url(r'^search/$', search, name="search"),
 
 ]

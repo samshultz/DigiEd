@@ -25,4 +25,9 @@ def cart_remove(request, book_id):
 
 def cart_detail(request):
     cart = Cart(request)
-    return render(request, 'cart/detail.html', {'cart': cart})
+    profile_upto_date = None
+    if request.user.is_authenticated:
+        user = request.user
+        profile_upto_date = all([user.email, user.first_name,
+                             user.last_name, user.username])
+    return render(request, 'cart/detail.html', {'cart': cart, 'profile_update': profile_upto_date})
