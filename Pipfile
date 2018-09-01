@@ -72,6 +72,7 @@ dj-database-url = "*"
 django-heroku = "*"
 gunicorn = "*"
 django-social-share = "*"
+"psycopg2-binary" = "*"
 
 [dev-packages]
 
