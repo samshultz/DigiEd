@@ -1,6 +1,7 @@
 from .base import *
 import django_heroku
-DEBUG = True
+
+DEBUG = False
 SECRET_KEY = os.environ.get('SECRET_KEY', 'ffa-e&09jjk)&^$()&rpe-6sp1)_$m49widsj934-0e]%^&!+_)(*&|/.>@!~`415_$1x_js6@syk^0n=l@4==(#xhgx3')
 
 
