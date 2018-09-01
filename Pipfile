@@ -71,6 +71,7 @@ vine = "==1.1.4"
 dj-database-url = "*"
 django-heroku = "*"
 gunicorn = "*"
+django-social-share = "*"
 
 [dev-packages]
 

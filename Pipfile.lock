@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "8f4d3c68d05258ebf0430983e159224a7c557683d8b0131c22947aa16ee9e465"
+            "sha256": "8ed496d5920405c968441818755e0e85f04d004d657017723f8f9a400ab2af64"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -206,6 +206,14 @@
             "editable": true,
             "git": "https://github.com/gbozee/django-ravepay.git",
             "ref": "c143f4fc867386d3740526e0cce114a878791948"
+        },
+        "django-social-share": {
+            "hashes": [
+                "sha256:381e514ab6a053cd7dc6261fad67fccf91504baed25f1247df7c174a348a49a1",
+                "sha256:7e176e7874928b047668e6fd802a903edb8333d578d0535d1bff6fe8a47521d8"
+            ],
+            "index": "pypi",
+            "version": "==1.3.0"
         },
         "django-star-ratings": {
             "hashes": [
