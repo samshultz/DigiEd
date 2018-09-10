@@ -16,7 +16,7 @@
                     <ul class="cate">
                         {% for item in order.items.all %}
                       <li>
-                            <a href="{{ item.book.book_file }}" download="{{ item.book.book_file }}">{{ item.book.name }}</a>
+                            <a href="{% if item.book.book_file %}{{ item.book.book_file.url }}{% else %}{{ item.book.book_url }}{% endif %}" download="{% if item.book.book_file %}{{ item.book.book_file.url }}{% else %}{{ item.book.book_url }}{% endif %}">{{ item.book.name }}</a>
                       </li>
                         
                         {% endfor %}

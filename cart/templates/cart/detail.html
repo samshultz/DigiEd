@@ -38,7 +38,8 @@
 					<tr class="rem{{ forloop.counter }}">
                         
 						<td class="invert">{{ forloop.counter }}</td>
-						<td class="invert-image"><a href="{{ product.get_absolute_url }}"><img src="{{ product.image.url }}" alt=" " class="img-responsive" /></a></td>
+						<td class="invert-image"><a href="{{ product.get_absolute_url }}">
+							<img src="{% if product.image %}{{ product.image.url }}{% else %}{{ product.image.image_url }}{% endif %}" alt=" " class="img-responsive" /></a></td>
 						
 						<td class="invert">{{ product.title }}</td>
 						<td class="invert">{% if product.featured %}₦{{ product.discount_price|intcomma }} {% else %}₦{{ product.price|intcomma }}{% endif %}</td>

@@ -125,14 +125,15 @@
 			<div class="timer-grids">
 				<div class="col-md-8 timer-grid-left animated wow slideInLeft" data-wow-delay=".5s">
 					<h3><a href="{{ featured.get_absolute_url }}">{{ featured.title }}</a></h3>
-					
-					<div class="new-collections-grid1-left simpleCart_shelfItem timer-grid-left-price">
-						<p><i>₦{{ featured.price|intcomma }}</i> <span class="item_price">₦{{ featured.discount_price|intcomma }}</span></p>
-						<h4>{{ featured.description|truncatewords:100 }}</h4>
-						<p>
-								{% include "shop/partials/add_to_cart_btn.html" with book=featured cart_product_form=cart_product_form %}
-						</p>
-					</div>
+					{% if featured %}
+						<div class="new-collections-grid1-left simpleCart_shelfItem timer-grid-left-price">
+							<p><i>₦{{ featured.price|intcomma }}</i> <span class="item_price">₦{{ featured.discount_price|intcomma }}</span></p>
+							<h4>{{ featured.description|truncatewords:100 }}</h4>
+							<p>
+									{% include "shop/partials/add_to_cart_btn.html" with book=featured cart_product_form=cart_product_form %}
+							</p>
+						</div>
+					{% endif %}
 					<div id="counter"> </div>
 					<script src="js/jquery.countdown.js"></script>
 					<script src="js/script.js"></script>

@@ -1,6 +1,12 @@
 {% if book %}
   {% if book.price == 0.00 %}
-<a class="item_add" download="{{ book.book_file.url }}" href="{{ book.book_file.url }}">download</a>
+
+<a 
+  class="item_add" 
+  download="{% if book.book_file %}{{ book.book_file.url }}{% else %}{{ book.book_url }}{% endif %}" 
+  href="{% if book.book_file %}{{ book.book_file.url }}{% else %}{{ book.book_url }}{% endif %}">
+    download
+</a>
 {% else %}
 
 <form action="{% url 'cart:cart_add' book.id %}" method="post">

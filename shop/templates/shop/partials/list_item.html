@@ -5,7 +5,7 @@
 <div class="new-collections-grid1 products-right-grid1 animated wow slideInUp" data-wow-delay=".5s">
         <div class="new-collections-grid1-image">
             <a href="{{ book.get_absolute_url }}" class="product-image">
-                <img src="{% adjust book.image 'fill' width=180 height=236 %}" alt=" " class="img-responsive">
+                <img src="{% if book.image %}{% adjust book.image 'fill' width=180 height=236 %}{% else %}{% adjust book.image_url 'fill' width=180 height=236 %}{% endif %}" alt=" " class="img-responsive">
             </a>
             <div class="new-collections-grid1-image-pos products-right-grids-pos">
                 <a href="{{ book.get_absolute_url }}">Quick View</a>

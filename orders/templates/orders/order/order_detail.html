@@ -59,7 +59,7 @@
                         
                         <tr>
                             <td><h4 id="h4.-bootstrap-heading">{{ item.book.name }}<a class="anchorjs-link" href="#h1.-bootstrap-heading"><span class="anchorjs-icon"></span></a></h1></td>
-                            {% if order.paid %}<td class="type-info"><a href="{{ order.book.book_file.url }}" download="{{ order.book.book_file.url }}"><span class="label label-success">Download</span></a></td>{% endif %}
+                            {% if order.paid %}<td class="type-info"><a href="{% if item.book.book_file %}{{ item.book.book_file.url }}{% else %}{{ item.book.book_url }}{% endif %}" download="{{ order.book.book_file.url }}"><span class="label label-success">Download</span></a></td>{% endif %}
                         </tr>
                         {% endfor %}
                         
