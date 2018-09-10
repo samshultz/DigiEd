@@ -35,7 +35,6 @@ class Category(models.Model):
     def get_absolute_url(self):
         return reverse("shop:product_list_by_category", kwargs={"category_slug": self.slug})
 
-    
 
 class Book(models.Model):
     category = models.ForeignKey(
@@ -43,12 +42,24 @@ class Book(models.Model):
     title = models.CharField(max_length=200, db_index=True)
     slug = models.SlugField(max_length=200, db_index=True)
     author = models.CharField(max_length=200, db_index=True)
-    image = models.ImageField(upload_to='books/%Y/%m/%d')
+    image = models.ImageField(upload_to='books/%Y/%m/%d', blank=True)
+    image_url = models.URLField(max_length=400, blank=True,
+                                help_text=("this should be provided only if "
+                                    "you don't want to upload an image and"
+                                    " would rather use an image from "
+                                    "google or any other medium. "
+                                    "This must be a URL"))
     featured = models.BooleanField(default=False)
     book_file = models.FileField(
         upload_to='books/file/%Y/%m/%d', max_length=100,
         validators=[FileExtensionValidator(ALLOWED_EXTENSIONS,
-                                           "Only pdf files are allowed")])
+                                           "Only pdf files are allowed")], blank=True)
+    book_url = models.URLField(max_length=400, blank=True,
+                               help_text=("this should be provided only if "
+                                    "you don't want to upload a book file and"
+                                    " would rather use a book from "
+                                    "google or any other medium. "
+                                    "This must be a URL"))
     description = models.TextField(blank=True)
     price = models.DecimalField(
         max_digits=10, decimal_places=2, default=0, validators=[validate_price])
@@ -80,9 +91,18 @@ class Book(models.Model):
         if self.price:
             if self.price < 0:
                 raise ValidationError("Price can't be negative")
-        
+
         if self.year.year > datetime.date.today().year:
             raise ValidationError("Year cannot be in the future")
+
+        if not self.image and not self.image_url:
+            raise ValidationError({'image_url': "Since you didn't upload any image for "
+                                                "this book, you must enter a URL"
+                                                " to an Image file"})
+        if not self.book_file and not self.book_url:
+            raise ValidationError({'book_url': "Since you didn't upload any book file for "
+                                               "this book, you must enter a URL"
+                                               " to book file"})
 
     def __str__(self):
         return self.title

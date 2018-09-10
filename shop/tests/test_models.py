@@ -37,7 +37,7 @@ class TestBookModel(TestCase):
 
     def test_raise_validation_error_for_invalid_isbn(self):
         try:
-            book = create_book_instance(isbn="123456789")
+            create_book_instance(isbn="123456789")
 
             self.fail("ISBN must be 10 or 13 characters long")
         except ValidationError:
@@ -45,7 +45,7 @@ class TestBookModel(TestCase):
 
     def test_reject_negative_prices(self):
         try:
-            book = create_book_instance(price=-2000)
+            create_book_instance(price=-2000)
 
             self.fail("Price can't be negative")
         except ValidationError:
@@ -76,10 +76,36 @@ class TestBookModel(TestCase):
     def test_only_one_item_featured(self):
         category1 = mixer.blend("shop.Category")
         category2 = mixer.blend("shop.Category")
-        book1 = create_book_instance(featured=True, category=category1)
-        book2 = create_book_instance(featured=True, category=category2)
+        create_book_instance(featured=True, category=category1)
+        create_book_instance(featured=True, category=category2)
         featured_books = Book.objects.filter(featured=True)
         self.assertEqual(len(featured_books), 1)
+
+    def test_book_saved_without_image_provided(self):
+        category = mixer.blend("shop.Category")
+        self.book = Book.objects.create(
+            category=category,
+            title="Django Example",
+            author="Antonio Mele",
+            book_file="ahk.pdf",
+            price=2000,
+            isbn="1234567890"
+
+        )
+        self.assertEqual(Book.objects.count(), 2)
+
+    def test_book_saved_without_book_file_provided(self):
+        category = mixer.blend("shop.Category")
+        self.book = Book.objects.create(
+            category=category,
+            title="Django Example",
+            author="Antonio Mele",
+            # book_file="ahk.pdf",
+            price=2000,
+            isbn="1234567890"
+
+        )
+        self.assertEqual(Book.objects.count(), 2)
 
 
 class CategoryModelTest(TestCase):

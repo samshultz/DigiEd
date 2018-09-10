@@ -31,7 +31,7 @@ class BookAdmin(admin.ModelAdmin):
         }),
         ("Files", {
             'classes': ('collapse',),
-            "fields": ("image", "book_file")
+            "fields": ("image", "image_url", "book_file", "book_url")
         }),
         ("Meta Data", {
             'classes': ('collapse',),

@@ -159,7 +159,7 @@ class TestProfileView(TestCase):
         self.assertTemplateUsed(resp, "account/profile_view.html")
 
     
-    def test_that_contains_correct_keys(self):
+    def test_that_context_contains_correct_keys(self):
         c = self.client
 
         User.objects.create_user(
