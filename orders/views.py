@@ -16,6 +16,7 @@ def order_create(request):
     ctx = {}
     cart = Cart(request)
     payment_public_key = settings.PAYSTACK_PUBLIC_KEY
+    ctx['payment_public_key'] = payment_public_key
     if request.method == 'POST':
         form = OrderCreateForm(request.POST)
         if form.is_valid():
@@ -24,7 +25,6 @@ def order_create(request):
 
             ctx['order'] = order
             ctx['cart'] = cart
-            ctx['payment_public_key'] = payment_public_key
             
             return render(request, 'orders/order/created.html', ctx)
     else:
