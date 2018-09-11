@@ -123,3 +123,4 @@ venv.bak/
 media/
 migrations/
 pro.py
+elasticsearch/

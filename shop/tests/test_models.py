@@ -87,6 +87,7 @@ class TestBookModel(TestCase):
             category=category,
             title="Django Example",
             author="Antonio Mele",
+            image_url="http://ebook-dl.com/pictures/books/2-advanced-technologies-systems-mirsad-hadzikadic6992(www.ebook-dl.com)_Large.jpg",
             book_file="ahk.pdf",
             price=2000,
             isbn="1234567890"
@@ -100,7 +101,8 @@ class TestBookModel(TestCase):
             category=category,
             title="Django Example",
             author="Antonio Mele",
-            # book_file="ahk.pdf",
+            image="ahk.pdf",
+            book_url="http://ebook-dl.com/dlbook/108393",
             price=2000,
             isbn="1234567890"
 
