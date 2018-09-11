@@ -8,12 +8,12 @@
         <div class="new-products-grid">
             <div class="new-products-grid-left">
                 <a href="{{ book.get_absolute_url }}">
-                    <img src="{{ book.image.url }}" alt=" " class="img-responsive" />
+                    <img src="{% if book.image %}{{ book.image.url }}{% else %}{{ book.image_url }}{% endif %}" alt=" " class="img-responsive" />
                 </a>
             </div>
             <div class="new-products-grid-right">
                 <h4>
-                    <a href="{{ book.get_absolute_url }}">{{ book.title }}</a>
+                    <a href="{{ book.get_absolute_url }}">{{ book.title|truncatechars:"17" }}</a>
                 </h4>
                 
                 <div class="simpleCart_shelfItem new-products-grid-right-add-cart">

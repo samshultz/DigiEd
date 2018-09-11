@@ -18,7 +18,7 @@
     <meta property="og:type"          content="website" />
     <meta property="og:title"         content="{{ book.title }} by {{ book.author }}" />
     <meta property="og:description"   content="{{ book.description|truncatewords:30 }}" />
-    <meta property="og:image"         content="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{{ book.image.url }}" />
+    <meta property="og:image"         content="{% if book.image %}{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{{ book.image.url }}{% else %}{{ book.image_url }}{% endif %}" />
     <meta property="og:image:width" content="1200"/>
     <meta property="og:image:height" content="650"/>
 {% endblock opengraph %} 
@@ -34,7 +34,7 @@
                     <a href="{% url 'shop:book_list' %}">
                         <span class="glyphicon glyphicon-book" aria-hidden="true"></span>All Books</a>
                 </li>
-                <li class="active">{{ book.title }}</li>
+                <li class="active">{{ book.title|truncatewords:"3" }}</li>
             </ol>
         </div>
     </div>
@@ -62,9 +62,10 @@
             <div class="col-md-5 single-right-left animated wow slideInUp" data-wow-delay=".5s">
                 <div class="flexslider">
                     <ul class="slides">
-                        <li data-thumb="{{ book.image.url }}">
+
+                        <li data-thumb="{% if book.image %}{{ book.image.url }}{% else %}{{ book.image_url }}{% endif %}">
                             <div class="thumb-image">
-                                <img src="{{ book.image.url }}" data-imagezoom="true" class="img-responsive"> </div>
+                                <img src="{% if book.image %}{{ book.image.url }}{% else %}{{ book.image_url }}{% endif %}" data-imagezoom="true" class="img-responsive"> </div>
                         </li>
 
                     </ul>

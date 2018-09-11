@@ -2,8 +2,14 @@
     "python.unitTest.pyTestArgs": [
         "."
     ],
-    "python.unitTest.unittestEnabled": false,
+    "python.unitTest.unittestEnabled": true,
     "python.unitTest.nosetestsEnabled": false,
     "python.unitTest.pyTestEnabled": false,
-    "python.unitTest.promptToConfigure": false
+    "python.unitTest.unittestArgs": [
+        "-v",
+        "-s",
+        "./shop",
+        "-p",
+        "test_*.py"
+    ]
 }
