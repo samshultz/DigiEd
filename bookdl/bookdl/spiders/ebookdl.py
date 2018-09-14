@@ -41,7 +41,7 @@ class EbookdlSpider(scrapy.Spider):
         item['isbn'] = isbn
         item['file_format'] = file_format
             
-        if int(item['num_pages']) > 200:
+        if int(item['num_pages']) > 300:
             item['price'] = random.choice(price_list)
         
         return item
