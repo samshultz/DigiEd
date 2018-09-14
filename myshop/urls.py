@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^account/profile/$', profile_view, name="profile_view"),
     url(r'^account/profile/edit/$', profile_edit, name="profile_edit"),
     url(r'^search/$', search, name="search"),
+    url(r'^pages/', include('django.contrib.flatpages.urls')),
 
 ]
 if settings.DEBUG:

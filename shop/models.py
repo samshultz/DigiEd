@@ -32,6 +32,11 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        super(Category, self).save(*args, **kwargs)
+
     def get_absolute_url(self):
         return reverse("shop:product_list_by_category", kwargs={"category_slug": self.slug})
 

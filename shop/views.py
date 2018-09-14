@@ -6,7 +6,6 @@ from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.models import User
 from cart.forms import CartAddProductForm
 from elasticsearch_dsl import Search
-from elasticsearch_dsl.connections import connections
 from pages.models import DiscountSection
 from shop.forms import SearchForm, UserEditForm
 
@@ -85,7 +84,6 @@ def search(request):
     if request.method == "GET":
         form = SearchForm(request.GET)
         if form.is_valid():
-            connections.create_connection()
             query = form.cleaned_data["q"]
             s = Search(index=["books"]).query(
                 "multi_match",

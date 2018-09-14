@@ -6,7 +6,7 @@
         <div class="header-grid">
             <div class="header-grid-left animated wow slideInLeft" data-wow-delay=".5s">
                 <ul>
-                    <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:snpet.hub@gmail.com.com">@snpet.com</a></li>
+                    <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:snpet.hub@gmail.com.com">@dlearn.tk</a></li>
                    
                    {% if not request.user.is_authenticated %}
                     <li><i class="glyphicon glyphicon-log-in" aria-hidden="true"></i><a href="{% url 'account_login' %}">Login</a></li>
@@ -30,7 +30,7 @@
         </div>
         <div class="logo-nav">
             <div class="logo-nav-left animated wow zoomIn" data-wow-delay=".5s">
-                <h1><a href="{% url 'home' %}">Best Store <span>Shop anywhere</span></a></h1>
+                <h1><a href="{% url 'home' %}">DLearn <span>Digital Learning</span></a></h1>
             </div>
             <div class="logo-nav-left1">
                 <nav class="navbar navbar-default">
@@ -52,7 +52,7 @@
                         </li>
                         
                         <li {% if menu == "shop" %}class="active"{% endif %}><a href="{% url 'shop:book_list' %}">All Books</a></li>
-                        <li><a href="mail.html">Mail Us</a></li>
+                        <!-- <li><a href="mail.html">Mail Us</a></li> -->
                         {% if request.user.is_authenticated %}
                           <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account <b class="caret"></b></a>
