@@ -2525,4 +2525,37 @@ Desired survivor size 8716288 bytes, new threshold 6 (max 6)
 2018-09-14T15:12:24.620+0100: 133164.931: Total time for which application threads were stopped: 0.0445978 seconds, Stopping threads took: 0.0443473 seconds
 2018-09-14T15:12:24.621+0100: 133164.932: Total time for which application threads were stopped: 0.0002609 seconds, Stopping threads took: 0.0000676 seconds
 2018-09-14T15:12:24.624+0100: 133164.935: Total time for which application threads were stopped: 0.0029898 seconds, Stopping threads took: 0.0027558 seconds
-2018-09-14T15:
+2018-09-14T15:12:24.624+0100: 133164.935: Total time for which application threads were stopped: 0.0004669 seconds, Stopping threads took: 0.0000704 seconds
+2018-09-14T15:12:24.628+0100: 133164.939: Total time for which application threads were stopped: 0.0034128 seconds, Stopping threads took: 0.0031599 seconds
+2018-09-14T15:12:24.673+0100: 133164.984: Total time for which application threads were stopped: 0.0448663 seconds, Stopping threads took: 0.0446295 seconds
+2018-09-14T15:12:25.673+0100: 133165.984: Total time for which application threads were stopped: 0.0002448 seconds, Stopping threads took: 0.0000619 seconds
+2018-09-14T15:12:42.862+0100: 133183.173: Total time for which application threads were stopped: 0.0080378 seconds, Stopping threads took: 0.0073482 seconds
+2018-09-14T15:12:57.881+0100: 133198.192: Total time for which application threads were stopped: 0.0004532 seconds, Stopping threads took: 0.0000685 seconds
+2018-09-14T15:13:00.846+0100: 133201.158: Total time for which application threads were stopped: 0.0003200 seconds, Stopping threads took: 0.0000629 seconds
+2018-09-14T15:13:03.848+0100: 133204.159: Total time for which application threads were stopped: 0.0003979 seconds, Stopping threads took: 0.0000633 seconds
+2018-09-14T15:13:04.849+0100: 133205.160: Total time for which application threads were stopped: 0.0002670 seconds, Stopping threads took: 0.0000647 seconds
+2018-09-14T15:13:13.854+0100: 133214.165: Total time for which application threads were stopped: 0.0002448 seconds, Stopping threads took: 0.0000633 seconds
+2018-09-14T15:13:23.540+0100: 133223.851: Total time for which application threads were stopped: 0.0009901 seconds, Stopping threads took: 0.0000879 seconds
+2018-09-14T15:13:23.810+0100: 133224.121: Total time for which application threads were stopped: 0.2702534 seconds, Stopping threads took: 0.2700195 seconds
+2018-09-14T15:13:23.811+0100: 133224.122: Total time for which application threads were stopped: 0.0003025 seconds, Stopping threads took: 0.0000425 seconds
+2018-09-14T15:13:23.811+0100: 133224.122: Total time for which application threads were stopped: 0.0003228 seconds, Stopping threads took: 0.0000383 seconds
+2018-09-14T15:13:23.811+0100: 133224.123: Total time for which application threads were stopped: 0.0002500 seconds, Stopping threads took: 0.0000534 seconds
+2018-09-14T15:13:23.815+0100: 133224.126: Total time for which application threads were stopped: 0.0007378 seconds, Stopping threads took: 0.0001720 seconds
+2018-09-14T15:13:23.815+0100: 133224.127: Total time for which application threads were stopped: 0.0006409 seconds, Stopping threads took: 0.0000733 seconds
+2018-09-14T15:13:23.849+0100: 133224.161: Total time for which application threads were stopped: 0.0258719 seconds, Stopping threads took: 0.0249129 seconds
+2018-09-14T15:13:23.988+0100: 133224.300: Total time for which application threads were stopped: 0.0005194 seconds, Stopping threads took: 0.0002770 seconds
+2018-09-14T15:13:24.989+0100: 133225.300: Total time for which application threads were stopped: 0.0002680 seconds, Stopping threads took: 0.0000652 seconds
+2018-09-14T15:13:28.991+0100: 133229.302: Total time for which application threads were stopped: 0.0002713 seconds, Stopping threads took: 0.0000742 seconds
+2018-09-14T15:16:17.108+0100: 133397.419: Total time for which application threads were stopped: 0.0003072 seconds, Stopping threads took: 0.0000766 seconds
+2018-09-14T15:24:06.005+0100: 133866.331: Total time for which application threads were stopped: 0.3390387 seconds, Stopping threads took: 0.0012439 seconds
+2018-09-14T15:38:52.676+0100: 134752.988: Total time for which application threads were stopped: 0.0851094 seconds, Stopping threads took: 0.0011499 seconds
+2018-09-14T15:39:13.748+0100: 134774.058: Total time for which application threads were stopped: 0.0002670 seconds, Stopping threads took: 0.0000723 seconds
+2018-09-14T16:11:36.070+0100: 136716.483: [GC (Allocation Failure) 2018-09-14T16:11:36.493+0100: 136716.805: [ParNew
+Desired survivor size 8716288 bytes, new threshold 6 (max 6)
+- age   1:     822664 bytes,     822664 total
+- age   2:     544512 bytes,    1367176 total
+- age   3:     186600 bytes,    1553776 total
+- age   4:       5528 bytes,    1559304 total
+- age   5:       4304 bytes,    1563608 total
+- age   6:       4944 bytes,    1568552 total
+: 138850K->2139K(153344K), 2.1945642 secs] 237064K->116742K(1031552K), 2.6678458 secs] [Times: user=0.03 sys=0.11, real=2.67 secs] 

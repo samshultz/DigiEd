@@ -140,7 +140,7 @@
 				</div>
 				<div class="col-md-4 timer-grid-right animated wow slideInRight" data-wow-delay=".5s">
 					<div class="timer-grid-right1">
-						<img src="{{ featured.image.url }}" alt=" " class="img-responsive" />
+						<img src="{% if featured.image %}{{ featured.image.url }}{% else %}{{ featured.image_url }}{% endif %}" alt=" " class="img-responsive" />
 						<div class="timer-grid-right-pos">
 							<h4>Special Offer</h4>
 						</div>
