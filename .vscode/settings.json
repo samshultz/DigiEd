@@ -11,5 +11,6 @@
         "./shop",
         "-p",
         "test_*.py"
-    ]
+    ],
+    "python.pythonPath": "C:\\Users\\Samshultz\\AppData\\Local\\Programs\\Python\\Python36-32\\python.exe"
 }
