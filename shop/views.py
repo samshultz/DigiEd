@@ -8,7 +8,7 @@ from cart.forms import CartAddProductForm
 from elasticsearch_dsl import Search
 from pages.models import DiscountSection
 from shop.forms import SearchForm, UserEditForm
-
+from newsletter.models import Newsletter
 from .models import Book, Category
 
 
@@ -17,10 +17,12 @@ def home(request):
     discount = DiscountSection.objects.filter(active=True).first()
     cart_product_form = CartAddProductForm(initial={'quantity': "1",
                                                     'update': False})
+    newsletter = Newsletter.objects.first()
     return render(request, "shop/home.html",
                   {'featured': featured,
                    'cart_product_form': cart_product_form,
-                   'discount': discount})
+                   'discount': discount,
+                   'newsletter': newsletter.slug})
 
 
 def product_list(request, category_slug=None):
