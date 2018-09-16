@@ -1,5 +1,4 @@
 import datetime
-import os
 
 from django.core.exceptions import ValidationError
 from django.core.validators import FileExtensionValidator, MinValueValidator
@@ -7,7 +6,6 @@ from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.text import slugify
-
 from taggit.managers import TaggableManager
 
 from .validators import (validate_isbn, validate_price,

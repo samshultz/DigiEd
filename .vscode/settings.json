@@ -8,9 +8,9 @@
     "python.unitTest.unittestArgs": [
         "-v",
         "-s",
-        "./shop",
+        "./shop/tests",
         "-p",
         "test_*.py"
     ],
-    "python.pythonPath": "C:\\Users\\Samshultz\\AppData\\Local\\Programs\\Python\\Python36-32\\python.exe"
+    "python.pythonPath": "C:\\Users\\Samshultz\\Desktop\\shoppy\\Scripts\\python.exe"
 }

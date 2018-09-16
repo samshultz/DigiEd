@@ -25,7 +25,7 @@
                         
                     </div>
                     <h4>
-                        <a href="{{ book.get_absolute_url }}">{{ book.title }}</a>
+                        <a href="{{ book.get_absolute_url }}">{{ book.title|truncatechars:25 }}</a>
                     </h4>
 
                     <div class="new-collections-grid1-left simpleCart_shelfItem">

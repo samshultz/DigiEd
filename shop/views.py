@@ -17,12 +17,15 @@ def home(request):
     discount = DiscountSection.objects.filter(active=True).first()
     cart_product_form = CartAddProductForm(initial={'quantity': "1",
                                                     'update': False})
-    newsletter = Newsletter.objects.first()
+    total_books = Book.objects.count()
+    # newsletter = Newsletter.objects.first()
+    newsletter = "new-books"
     return render(request, "shop/home.html",
                   {'featured': featured,
                    'cart_product_form': cart_product_form,
                    'discount': discount,
-                   'newsletter': newsletter.slug})
+                   'newsletter': newsletter,
+                   'total_books': total_books})
 
 
 def product_list(request, category_slug=None):

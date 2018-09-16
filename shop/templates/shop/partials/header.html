@@ -46,12 +46,9 @@
                 <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
                     <ul class="nav navbar-nav">
                         
-                        <li {% if menu == 'home' %}class="active"{% endif %}><a href="{% url 'home' %}" class="act">Home</a></li>	
+                        <li {% if menu == 'home' %}class="active"{% endif %}><a href="{% url 'home' %}" {% if menu == 'home' %}class="act"{% endif %}>Home</a></li>
                         
-                            
-                        </li>
-                        
-                        <li {% if menu == "shop" %}class="active"{% endif %}><a href="{% url 'shop:book_list' %}">All Books</a></li>
+                        <li {% if menu == "shop" %}class="active"{% endif %}><a href="{% url 'shop:book_list' %}" {% if menu == 'shop' %}class="act"{% endif %}>All Books</a></li>
                         <!-- <li><a href="mail.html">Mail Us</a></li> -->
                         {% if request.user.is_authenticated %}
                           <li class="dropdown">

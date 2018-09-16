@@ -12,7 +12,7 @@ class CategoryAdmin(admin.ModelAdmin):
 class BookAdmin(admin.ModelAdmin):
     '''Admin View for Book'''
 
-    list_display = ('title', 'author', 'num_pages',
+    list_display = ('title', 'num_pages',
                     'publisher', 'year', 'price')
     list_filter = ('author', 'publisher', 'price', 'year')
     list_editable = ('price',)
