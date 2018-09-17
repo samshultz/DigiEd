@@ -79,10 +79,40 @@ class TestBookCase(StaticLiveServerTestCase):
 
         # there is also a button by the side of the form asking you to subscribe
         self.assertEqual(self.browser.find_element_by_id("id_submit").get_attribute("value"), "Subscribe")
-        
-    # def test_that_user_can_see_list_of_books_and_prices(self):
-    #     # John comes to DIGIED.COM  and sees a list of books and their prices
-    #     self.browser.get(self.live_server_url + '/shop/')
+
+    def test_that_user_can_see_list_of_books_and_prices(self):
+        # John comes to dlearn.tk  and is taken to the homepage
+        self.browser.get(self.live_server_url)
+        # he sees a link with the text "All Books" and clicks it
+        self.browser.find_element_by_link_text("ALL BOOKS").click()
+        # he is then taken to a page with a list of books and their prices
+        book_lists = self.browser.find_element_by_css_selector(".products-right-grids-bottom")
+        book = book_lists.find_element_by_css_selector(".new-collections-grid1")
+        self.assertIn(book.find_element_by_css_selector("h4 a").text.title(), self.browser.page_source)
+        self.assertIn(book.find_element_by_css_selector("span.item_price").text, self.browser.page_source)
+        # he see that some books are free and others are paid
+        self.browser.execute_script("window.scrollTo(0, 1500);")
+        time.sleep(5)
+        books = book_lists.find_element_by_css_selector(".products-right-grids-bottom-grid")
+        books = books.find_elements_by_css_selector(".new-collections-grid1")
+        self.assertNotEqual(books[0].find_element_by_css_selector("span.item_price").text, "Free")
+        self.assertEqual(books[1].find_element_by_css_selector("span.item_price").text, "Free")
+        # he also notices that the free books have a download button beneath
+        # them while the paid books have an add to cart button beneath them
+        # he also sees a list of categories on the side of the page
+        # on scrolling down the page he finds that there is a list of new books
+        # on the side and also he sees a pagination widget
+        # he clicks on the clicks on the image of of a book and is taken to
+        # the details page of the book
+        # He knows this because he can see the title of the book
+        # on the page's title, he also sees the image and title of the book
+        # on the page with price (free or paid) and download link or add to cart button
+        # He also sees some stars on the page for rating the book
+        # He scrolls to the bottom of the page and sees a tab widget which
+        # contains information on the book
+        # at the very bottom of the page he sees a list of similar books
+        # also on this page he sees a list of categories at the side of the page
+
 
     #     self.assertGreater(
     #         len(self.browser.find_elements_by_class_name(
