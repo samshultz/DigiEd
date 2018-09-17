@@ -17,7 +17,7 @@ DATABASES = {
         'HOST': "ec2-107-22-221-60.compute-1.amazonaws.com",
         'NAME': 'd6fk0t2sq5ul7i',
         'USER': 'yvwgbarytxgwpa',
-        'PASSWORD': "f39e5fdfbfff04af5fef9d8435564bdc8f2e2f3fe90e060b095b8d2616c316d5",
+        'PASSWORD': os.environ.get("DATABASE_PWD"),
     }
 }
 # paystack
