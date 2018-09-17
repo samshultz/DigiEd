@@ -1,4 +1,5 @@
 from .base import *
+import django_heroku
 
 DEBUG = True
 ALLOWED_HOSTS = ['dlearn.tk', 'www.dlearn.tk', "dlearn.herokuapp.com", "www.dlearn.herokuapp.com"]
@@ -43,3 +44,5 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_SECONDS = 1000000
 SECURE_HSTS_PRELOAD = True
 SECURE_FRAME_DENY = True
+
+django_heroku.settings(locals())
