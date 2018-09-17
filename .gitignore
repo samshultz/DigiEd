@@ -122,7 +122,6 @@ venv.bak/
 .mypy_cache/
 media/
 migrations/
-pro.py
 elasticsearch/
 Pipfile
 Pipfile.lock
