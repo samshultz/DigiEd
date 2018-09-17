@@ -31,6 +31,7 @@ EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
+django_heroku.settings(locals())
 # Security Settings
 
 # SECURE_CONTENT_TYPE_NOSNIFF = True
@@ -43,5 +44,3 @@ EMAIL_USE_TLS = True
 # SECURE_HSTS_SECONDS = 1000000
 # SECURE_HSTS_PRELOAD = True
 # SECURE_FRAME_DENY = True
-
-django_heroku.settings(locals())
