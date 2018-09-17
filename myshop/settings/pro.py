@@ -17,7 +17,7 @@ DATABASES = {
         'HOST': "ec2-107-22-221-60.compute-1.amazonaws.com",
         'NAME': 'd6fk0t2sq5ul7i',
         'USER': 'yvwgbarytxgwpa',
-        'PASSWORD': os.environ.get("DATABASE_PWD"),
+        'PASSWORD': "f39e5fdfbfff04af5fef9d8435564bdc8f2e2f3fe90e060b095b8d2616c316d5",
     }
 }
 # paystack
@@ -32,9 +32,7 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 # Security Settings
-CORS_REPLACE_HTTPS_REFERER = True
-HOST_SCHEME = "https://"
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_SSL_REDIRECT = True
