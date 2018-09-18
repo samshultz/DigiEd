@@ -1,15 +1,16 @@
 from django.core.management import BaseCommand
 
-import elasticsearch_dsl
 import elasticsearch_dsl.connections
 from shop.es_docs import ESBook
 from shop.models import Book
+from django.conf import settings
 
 
 class Command(BaseCommand):
     help = "Index all data to Elasticsearch"
     def handle(self, *args, **options):
-        elasticsearch_dsl.connections.connections.create_connection(hosts=['https://ef45e787737c2385b89f93820c9bfea6.us-east-1.aws.found.io'], http_auth="elastic:veOFdNEXM0ugmxJsgauaKrH1")
+        elasticsearch_dsl.connections.connections.create_connection(hosts=[settings.FOUNDELASTICSEARCH_URL], 
+                                                                    http_auth=settings.HTTP_AUTH)
         for book in Book.objects.all():
             print("indexing {}".format(book.title))
             if book.image:

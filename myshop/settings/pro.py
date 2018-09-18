@@ -40,10 +40,10 @@ SECURE_BROWSER_XSS_FILTER = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 X_FRAME_OPTIONS = "DENY"
-# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-# SECURE_HSTS_SECONDS = 1000000
-# SECURE_HSTS_PRELOAD = True
-# SECURE_FRAME_DENY = True
-# http://dlearn.tk/
+
 # veOFdNEXM0ugmxJsgauaKrH1 = elasticsearch password
 # username = elastic
+
+# elasticsearch settings
+FOUNDELASTICSEARCH_URL = os.environ.get("FOUNDELASTICSEARCH_URL", "localhost")
+HTTP_AUTH = os.environ.get("elastic:veOFdNEXM0ugmxJsgauaKrH1")

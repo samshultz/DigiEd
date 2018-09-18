@@ -17,3 +17,7 @@ PAYSTACK_PUBLIC_KEY = "pk_test_6d19b1035287fb78ec85b8eabb68b8aef75771cf"
 
 # Email settings
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# elasticsearch settings
+FOUNDELASTICSEARCH_URL = "localhost:9200"
+HTTP_AUTH = os.environ.get("elastic:veOFdNEXM0ugmxJsgauaKrH1", None)
