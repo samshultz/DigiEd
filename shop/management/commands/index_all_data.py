@@ -9,7 +9,7 @@ from shop.models import Book
 class Command(BaseCommand):
     help = "Index all data to Elasticsearch"
     def handle(self, *args, **options):
-        elasticsearch_dsl.connections.connections.create_connection(hosts=['https://elastic:veOFdNEXM0ugmxJsgauaKrH1@us-east-1.aws.found.io'])
+        elasticsearch_dsl.connections.connections.create_connection(hosts=['https://ef45e787737c2385b89f93820c9bfea6.us-east-1.aws.found.io'], http_auth="elastic:veOFdNEXM0ugmxJsgauaKrH1")
         for book in Book.objects.all():
             print("indexing {}".format(book.title))
             if book.image:
