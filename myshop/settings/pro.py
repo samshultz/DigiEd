@@ -45,3 +45,5 @@ X_FRAME_OPTIONS = "DENY"
 # SECURE_HSTS_PRELOAD = True
 # SECURE_FRAME_DENY = True
 # http://dlearn.tk/
+# veOFdNEXM0ugmxJsgauaKrH1 = elasticsearch password
+# username = elastic

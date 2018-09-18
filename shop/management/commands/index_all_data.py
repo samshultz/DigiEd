@@ -9,8 +9,9 @@ from shop.models import Book
 class Command(BaseCommand):
     help = "Index all data to Elasticsearch"
     def handle(self, *args, **options):
-        elasticsearch_dsl.connections.connections.create_connection(hosts=['https://ef45e787737c2385b89f93820c9bfea6.us-east-1.aws.found.io'])
+        elasticsearch_dsl.connections.connections.create_connection(hosts=['https://ef45e7:dXMtZWFzdC0xLmF3cy5mb3VuZC5pbyRlZjQ1ZTc4NzczN2MyMzg1Yjg5ZjkzODIwYzliZmVhNiRjMzlhZmEyOWZlMjdhYTlkZWQ0MGYyMDliNmQzNTI3ZA==.us-east-1.aws.found.io'])
         for book in Book.objects.all():
+            print("indexing {}".format(book.title))
             if book.image:
                 image = book.image.url
             else:
