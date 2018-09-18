@@ -1,4 +1,4 @@
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from .models import Book
 from shop.es_docs import ESBook
@@ -29,3 +29,8 @@ def index_data(sender, instance, created, **kwargs):
             
             
         esp.save(index='books')
+
+@receiver(post_delete, sender=Book)
+def remove_book_from_index(sender, instance, **kwargs):
+    ESBook().get(id=instance.pk, index='books').delete()
+    
