@@ -47,4 +47,5 @@ SITE_ID = 2
 # elasticsearch settings
 FOUNDELASTICSEARCH_URL = os.environ.get("FOUNDELASTICSEARCH_URL", "localhost")
 HTTP_AUTH = os.environ.get("HTTP_AUTH", "elastic:veOFdNEXM0ugmxJsgauaKrH1")
-BROKER_URL = os.environ['REDIS_URL']
+
+CELERY_BROKER_URL = os.environ.get("CLOUDAMQP_URL")
