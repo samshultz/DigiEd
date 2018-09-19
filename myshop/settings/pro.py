@@ -46,4 +46,4 @@ X_FRAME_OPTIONS = "DENY"
 
 # elasticsearch settings
 FOUNDELASTICSEARCH_URL = os.environ.get("FOUNDELASTICSEARCH_URL", "localhost")
-HTTP_AUTH = os.environ.get("elastic:veOFdNEXM0ugmxJsgauaKrH1")
+HTTP_AUTH = os.environ.get("HTTP_AUTH", "elastic:veOFdNEXM0ugmxJsgauaKrH1")

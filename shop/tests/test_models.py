@@ -29,6 +29,30 @@ class TestBookModel(TestCase):
 
         )
 
+    def test_raises_error_if_no_image_and_image_url_is_not_provided(self):
+        with self.assertRaises(ValidationError):
+            Book.objects.create(
+            category=self.category,
+            title="Application in Writing",
+            author="Antonio Mele",
+            book_file="ahk.pdf",
+            price=2000,
+            isbn="1234567890"
+
+        )
+
+    def test_raises_error_if_no_book_and_book_url_is_not_provided(self):
+        with self.assertRaises(ValidationError):
+            Book.objects.create(
+            category=self.category,
+            title="Application in Writing",
+            author="Antonio Mele",
+            image_url="http://ebook-dl.com/love-is-beautiful.jpg",
+            price=2000,
+            isbn="1234567890"
+
+        )
+
     def test_book_was_created(self):
         self.assertEqual(Book.objects.count(), 1)
 
@@ -118,6 +142,12 @@ class CategoryModelTest(TestCase):
 
     def test_can_create_category(self):
         self.assertEqual(Category.objects.count(), 1)
+
+    def test_slug_set_without_explicitly_setting_it(self):
+        category = Category.objects.create(
+            name="lovering how"
+        )
+        self.assertEqual(category.slug, "lovering-how")
 
     def test_string_representation(self):
         self.assertEqual("Applications Development", str(self.cat))

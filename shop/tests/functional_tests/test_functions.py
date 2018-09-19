@@ -96,7 +96,7 @@ class TestBookCase(StaticLiveServerTestCase):
         books = book_lists.find_element_by_css_selector(".products-right-grids-bottom-grid")
         books = books.find_elements_by_css_selector(".new-collections-grid1")
         self.assertNotEqual(books[0].find_element_by_css_selector("span.item_price").text, "Free")
-        self.assertEqual(books[1].find_element_by_css_selector("span.item_price").text, "Free")
+        # self.assertEqual(books[1].find_element_by_css_selector("span.item_price").text, "Free")
         # he also notices that the free books have a download button beneath
         # them while the paid books have an add to cart button beneath them
         # he also sees a list of categories on the side of the page
