@@ -43,8 +43,8 @@ X_FRAME_OPTIONS = "DENY"
 
 # veOFdNEXM0ugmxJsgauaKrH1 = elasticsearch password
 # username = elastic
-
+SITE_ID = 2
 # elasticsearch settings
 FOUNDELASTICSEARCH_URL = os.environ.get("FOUNDELASTICSEARCH_URL", "localhost")
 HTTP_AUTH = os.environ.get("HTTP_AUTH", "elastic:veOFdNEXM0ugmxJsgauaKrH1")
-BROKER_URL=os.environ['REDIS_URL']
+BROKER_URL = os.environ['REDIS_URL']
