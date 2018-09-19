@@ -83,7 +83,6 @@ PyDispatcher==2.0.5
 PyHamcrest==1.9.0
 pylint==2.1.1
 pyOpenSSL==18.0.0
-pypiwin32==223
 pytest==3.7.0
 pytest-cov==2.5.1
 pytest-django==3.3.3
