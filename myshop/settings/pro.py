@@ -47,3 +47,4 @@ X_FRAME_OPTIONS = "DENY"
 # elasticsearch settings
 FOUNDELASTICSEARCH_URL = os.environ.get("FOUNDELASTICSEARCH_URL", "localhost")
 HTTP_AUTH = os.environ.get("HTTP_AUTH", "elastic:veOFdNEXM0ugmxJsgauaKrH1")
+BROKER_URL=os.environ['REDIS_URL']
