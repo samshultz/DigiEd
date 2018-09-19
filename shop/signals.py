@@ -28,9 +28,9 @@ def index_data(sender, instance, created, **kwargs):
                         )
             
             
-        esp.save(index='books')
+        esp.save(index='books_list')
 
 @receiver(post_delete, sender=Book)
 def remove_book_from_index(sender, instance, **kwargs):
-    ESBook().get(id=instance.pk, index='books').delete()
+    ESBook().get(id=instance.pk, index='books_list').delete()
     

@@ -35,5 +35,5 @@ class Command(BaseCommand):
                      )
         
         
-            esp.save(index='books')
+            esp.save(index='books_list')
         
