@@ -6,9 +6,10 @@
         <div class="new-collections-grid1-image">
             <a href="{{ book.get_absolute_url }}" class="product-image">
                 {% if book.image %}
-                <img src="{% adjust book.image 'fill' width=180 height=236 %}" alt=" " class="img-responsive">
+                <img src="{% adjust book.image 'fill' width=180 height=236 %}"
+                   class="img-responsive" alt="{{ book.title }}">
                 {% else %}
-                <image src="{{ book.image_url }}" height="236" width="180" class="img-responsive">
+                <img src="{{ book.image_url }}" height="236" width="180" class="img-responsive" alt="{{ book.title }}">
                 {% endif %}
             </a>
             <div class="new-collections-grid1-image-pos products-right-grids-pos">

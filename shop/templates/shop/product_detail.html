@@ -48,7 +48,7 @@
             {% if discount %}
             <div class="men-position animated wow slideInUp" data-wow-delay=".5s">
                 <a href="">
-                    <img src="{% adjust discount.image 'fill' width=500 height=634 %}" alt=" " class="img-responsive" />
+                    <img src="{% adjust discount.image 'fill' width=500 height=634 %}" alt="{{ discount.title }} " class="img-responsive" />
                 </a>
                 <div class="men-position-pos">
                     <h4>{{ discount.title }}</h4>

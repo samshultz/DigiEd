@@ -8,7 +8,7 @@
         <div class="new-products-grid">
             <div class="new-products-grid-left">
                 <a href="{{ book.get_absolute_url }}">
-                    <img src="{% if book.image %}{{ book.image.url }}{% else %}{{ book.image_url }}{% endif %}" alt=" " class="img-responsive" />
+                    <img src="{% if book.image %}{{ book.image.url }}{% else %}{{ book.image_url }}{% endif %}" alt="{{ book.title }}" class="img-responsive" />
                 </a>
             </div>
             <div class="new-products-grid-right">
