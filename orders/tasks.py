@@ -17,6 +17,6 @@ def order_created(order_id, tx_ref):
     message = 'Dear {},\n\nYou have successfully placed an order.\
     Your order id is {}.\n\nClick on the link below to download \
     your resource. \n\n {}'.format(order.first_name, order.id, download_url)
-    mail_sent = send_mail(subject, message, 'noreply@dlearn.tk', [order.email])
+    mail_sent = send_mail(subject, message, 'snpet.hub@gmail.com', [order.email])
 
     return mail_sent
