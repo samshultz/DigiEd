@@ -26,7 +26,7 @@ def order_create(request):
             ctx['order'] = order
             ctx['cart'] = cart
             order_created.delay(order.id, order.tx_ref)
-            
+
             return render(request, 'orders/order/created.html', ctx)
     else:
 
