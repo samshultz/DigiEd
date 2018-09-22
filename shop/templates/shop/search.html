@@ -16,7 +16,6 @@
 	 <div class="new-collections">
 		<div class="container">
 			<div class="alert alert-{% if total_results == 0 %}danger {% else %}success {% endif %} text-center">
-                    
                 {{ total_results }} result{{total_results|pluralize }} {% if total_results != 1 %}were {% else %} was {% endif %}found for your search.
                 
             </div>

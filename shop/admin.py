@@ -17,7 +17,7 @@ class BookAdmin(admin.ModelAdmin):
     list_filter = ('author', 'publisher', 'price', 'year')
     list_editable = ('price',)
     prepopulated_fields = {'slug': ('title',)}
-    search_fields = ('title', 'author', 'description')
+    search_fields = ('title', 'author', 'publisher')
     date_hierarchy = 'year'
     ordering = ('-created',)
     view_on_site = True

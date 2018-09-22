@@ -90,18 +90,18 @@ def search(request):
         form = SearchForm(request.GET)
         if form.is_valid():
             query = form.cleaned_data["q"]
-            s = Search(index=["books"]).query(
+            search = Search(index=["books"]).query(
                 "multi_match",
                 query=query,
                 fields=['title', 'author', 'publisher'])
-            results = s.execute()
+            total = search.count()
+            search = search[0:total]
+            results = search.execute()
             results = results.hits
-            total_results = len(results)
 
             paginator = Paginator(results, 12)
             page = request.GET.get('page')
             try:
-
                 results = paginator.page(page)
             except PageNotAnInteger:
                 # If page is not an integer deliver the first page
@@ -110,7 +110,7 @@ def search(request):
                 # If page is out of range deliver last page of results
                 results = paginator.page(paginator.num_pages)
             return render(request, "shop/search.html", {'results': results,
-                                                        'total_results': total_results,
+                                                        'total_results': total,
                                                         'query': query,
                                                         "cart_product_form": cart_product_form})
 
