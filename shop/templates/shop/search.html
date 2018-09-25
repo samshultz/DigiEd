@@ -26,7 +26,7 @@
                             {% for book in  results|slice:":3" %}
                             <div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
                                     <div class="new-collections-grid1-image">
-                                        <a href="{{ book.url }}" class="product-image"><img src="{% if book.image %}{{ book.image }}{% else %}{{ book.image_url }}{% endif %}" alt=" " class="img-responsive" /></a>
+                                        <a href="{{ book.url }}" class="product-image"><img src="{% if book.image %}{{ book.image }}{% else %}{{ book.image_url }}{% endif %}" alt="{{ book.title }}" class="img-responsive" /></a>
                                         <div class="new-collections-grid1-image-pos">
                                             <a href="{{ book.url }}">Quick View</a>
                                         </div>
@@ -57,7 +57,7 @@
                             {% for book in  results|slice:"3:6" %}
                             <div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
                                     <div class="new-collections-grid1-image">
-                                        <a href="{{ book.url }}" class="product-image"><img src="{% if book.image %}{{ book.image }}{% else %}{{ book.image_url }}{% endif %}" alt=" " class="img-responsive" /></a>
+                                        <a href="{{ book.url }}" class="product-image"><img src="{% if book.image %}{{ book.image }}{% else %}{{ book.image_url }}{% endif %}" alt="{{ book.title }}" class="img-responsive" /></a>
                                         <div class="new-collections-grid1-image-pos">
                                             <a href="{{ book.url }}">Quick View</a>
                                         </div>
@@ -88,7 +88,7 @@
                             {% for book in  results|slice:"6:9" %}
                             <div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
                                     <div class="new-collections-grid1-image">
-                                        <a href="{{ book.url }}" class="product-image"><img src="{% if book.image %}{{ book.image }}{% else %}{{ book.image_url }}{% endif %}" alt=" " class="img-responsive" /></a>
+                                        <a href="{{ book.url }}" class="product-image"><img src="{% if book.image %}{{ book.image }}{% else %}{{ book.image_url }}{% endif %}" alt="{{ book.title }}" class="img-responsive" /></a>
                                         <div class="new-collections-grid1-image-pos">
                                             <a href="{{ book.url }}">Quick View</a>
                                         </div>
@@ -118,7 +118,7 @@
                             {% for book in  results|slice:"9:12" %}
                             <div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
                                     <div class="new-collections-grid1-image">
-                                        <a href="{{ book.url }}" class="product-image"><img src="{% if book.image %}{{ book.image }}{% else %}{{ book.image_url }}{% endif %}" alt=" " class="img-responsive" /></a>
+                                        <a href="{{ book.url }}" class="product-image"><img src="{% if book.image %}{{ book.image }}{% else %}{{ book.image_url }}{% endif %}" alt="{{ book.title }}" class="img-responsive" /></a>
                                         <div class="new-collections-grid1-image-pos">
                                             <a href="{{ book.url }}">Quick View</a>
                                         </div>

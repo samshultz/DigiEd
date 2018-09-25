@@ -39,7 +39,7 @@
             {% if discount %}
                 
             <div class="men-position animated wow slideInUp" data-wow-delay=".5s">
-                <a href=""><img src="{% adjust discount.image 'fill' width=500 height=634 %}" alt=" " class="img-responsive" /></a>
+                <a href=""><img src="{% adjust discount.image 'fill' width=500 height=634 %}" alt="{{ discount.title }}" class="img-responsive" /></a>
                 <div class="men-position-pos">
                     <h4>{{ discount.title }}</h4>
                     <h5><span>{{ discount.percent_discount}}%</span> Flat Discount</h5>
@@ -51,7 +51,7 @@
             <div class="products-right-grid">
                 
                 <div class="products-right-grids-position animated wow slideInRight" data-wow-delay=".5s">
-                    <img src="{% static 'shop/images/library.jpg' %}" alt=" " class="img-responsive" />
+                    <img src="{% static 'shop/images/library.jpg' %}" alt="library image" class="img-responsive" />
                     <div class="products-right-grids-position1">
                         <h4>{% if category %}{{ category.name }}{% else %}All Books{% endif %}</h4>
                         <p>{{ category.description }}</p>
