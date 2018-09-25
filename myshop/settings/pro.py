@@ -66,3 +66,7 @@ CELERY_BROKER_URL = os.environ.get("CLOUDAMQP_URL")
 CELERY_BROKER_POOL_LIMIT = 3
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+ROBOTS_SITEMAP_URLS = [
+    'https://dlearn.tk/sitemap.xml',
+]

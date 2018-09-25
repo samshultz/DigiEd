@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.github',
     'allauth.socialaccount.providers.google',
     'django_social_share',
+    'robots',
     # 'storages',
 ]
 

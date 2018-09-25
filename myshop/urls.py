@@ -31,6 +31,7 @@ urlpatterns = [
     url(r'^pages/', include('django.contrib.flatpages.urls')),
     url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps},
         name='django.contrib.sitemaps.views.sitemap'),
+    url(r'^robots\.txt', include('robots.urls')),
 
 ]
 if settings.DEBUG:
