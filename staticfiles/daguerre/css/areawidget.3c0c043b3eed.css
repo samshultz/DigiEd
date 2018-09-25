@@ -1,0 +1,34 @@
+.daguerre-areas{
+    position: relative;
+}
+
+.daguerre-areas > img{
+    float: left;
+    margin: 10px 10px 0 0;
+}
+
+.daguerre-areas > table{
+    float: left;
+    min-width: 540px;
+    margin-top: 10px;
+}
+
+#grp-container .add-area{
+    min-width: 100px;
+    height: 25px;
+    padding: 0;
+    margin: 0;
+}
+
+#grp-container .add-area-cell{
+    padding: 0;
+}
+
+#grp-container .add-area > img{
+    display: none;
+}
+
+.area-priority{
+    cursor: help;
+    border-bottom: dotted 1px;
+}
