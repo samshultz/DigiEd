@@ -102,7 +102,7 @@
                     <a href="{% url 'cart:cart_detail' %}">
                         <h3> <div class="total">
                             <span class="">₦{{ cart.get_total_price|intcomma }}</span> (<span id="" class=""></span>{{ cart|length }} book{{ cart|length|pluralize }})</div>
-                            <img src="{% static 'shop/images/bag.png' %}" alt="" />
+                            <img src="{% static 'shop/images/bag.png' %}" alt="Cart" />
                         </h3>
                     </a>
                     <p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>

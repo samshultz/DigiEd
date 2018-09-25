@@ -57,7 +57,7 @@
 					<div class="grid">
 						<figure class="effect-julia">
 								
-							<img src="{% static 'shop/images/books.jpg' %}" alt="" class="img-responsive" height="426" width="388"/>
+							<img src="{% static 'shop/images/books.jpg' %}" alt="library image" class="img-responsive" height="426" width="388"/>
 							<figcaption>
 								<h3>Digital <span>Learning</span><i> for programming ebooks</i></h3>
 								<div>
@@ -75,7 +75,7 @@
 						
 					<div class="banner-bottom-grid-left-grid left1-grid grid-left-grid1">
 						<div class="banner-bottom-grid-left-grid1">
-							<img src="{% adjust discount.image 'fill' width=640 height=345 %}" alt=" " class="img-responsive" />
+							<img src="{% adjust discount.image 'fill' width=640 height=345 %}" alt="{{ discount.title }}" class="img-responsive" />
 						</div>
 						<div class="banner-bottom-grid-left1-pos">
 							<p>Discount {{ discount.percent_discount }}%</p>
@@ -84,7 +84,7 @@
 					{% endif %}
 					<div class="banner-bottom-grid-left-grid left1-grid grid-left-grid1">
 						<div class="banner-bottom-grid-left-grid1">
-							<img src="{% static 'shop/images/2.jpg' %}" alt=" " class="img-responsive" />
+							<img src="{% static 'shop/images/2.jpg' %}" alt="header image" class="img-responsive" />
 						</div>
 						<div class="banner-bottom-grid-left1-position">
 							<div class="banner-bottom-grid-left1-pos1">
@@ -96,7 +96,7 @@
 				<div class="banner-bottom-grid-right animated wow slideInRight" data-wow-delay=".5s">
 					<div class="banner-bottom-grid-left-grid grid-left-grid1">
 						<div class="banner-bottom-grid-left-grid1">
-							<img src="{% static 'shop/images/3.jpg' %}" alt=" " class="img-responsive" />
+							<img src="{% static 'shop/images/3.jpg' %}" alt="header image 2" class="img-responsive" />
 						</div>
 						<div class="grid-left-grid1-pos">
 							<p>top and classic programming <span>ebooks</span></p>
