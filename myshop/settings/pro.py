@@ -1,7 +1,7 @@
 import django_heroku
 from .base import *
 
-DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = ['dlearn.tk', 'www.dlearn.tk', "dlearn.herokuapp.com",
                  "www.dlearn.herokuapp.com"]
 
