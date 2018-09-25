@@ -61,7 +61,7 @@ SITE_ID = 2
 FOUNDELASTICSEARCH_URL = os.environ.get("FOUNDELASTICSEARCH_URL", "localhost")
 HTTP_AUTH = os.environ.get("HTTP_AUTH", "elastic:veOFdNEXM0ugmxJsgauaKrH1")
 
-CELERY_BROKER_URL = os.environ.get("CLOUDAMQP_CRIMSON_URL")
+CELERY_BROKER_URL = os.environ.get("CLOUDAMQP_URL")
 
 CELERY_BROKER_POOL_LIMIT = 3
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
