@@ -1,6 +1,7 @@
 import os
 
 from celery import Celery
+from celery import shared_task
 from django.conf import settings
 
 # set the default Django settings module for the 'celery' program.
