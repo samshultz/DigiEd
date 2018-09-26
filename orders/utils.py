@@ -1,6 +1,8 @@
 import string
 import random
-from .models import Order
+from django.core.mail import send_mail
+from orders.models import Order
+from django.urls import reverse_lazy
 
 def transaction_reference_generator(size=15, chars=string.digits + string.ascii_letters):
     return ''.join(random.choice(chars) for _ in range(size))
