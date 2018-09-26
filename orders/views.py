@@ -8,7 +8,7 @@ from paystackapi.paystack import Paystack
 
 from .forms import OrderCreateForm
 from .models import Order, OrderItem
-from myshop.orders.tasks import order_created
+from .tasks import order_created
 from .utils import create_order_items
 
 
