@@ -12,7 +12,7 @@ from .models import Order, OrderItem
 from .tasks import order_created
 from .utils import create_order_items
 
-def order_created(order_id, tx_ref):
+def order_created_mail(order_id, tx_ref):
     """
     Task to send an e-mail notification when an order is
     successfully created.
@@ -42,7 +42,7 @@ def order_create(request):
 
             ctx['order'] = order
             ctx['cart'] = cart
-            order_created(order.id, order.tx_ref)
+            order_created_mail(order.id, order.tx_ref)
             order_created.delay(order.id, order.tx_ref)
 
             return render(request, 'orders/order/created.html', ctx)
@@ -85,7 +85,7 @@ def confirm_payment(request, order_id):
             # clear the cart
             cart.clear()
             # launch asynchronous task
-            order_created(order.id, order.tx_ref)
+            order_created_mail(order.id, order.tx_ref)
             order_created.delay(order.id, order.tx_ref)
             return render(request, 'orders/order/done.html',
                           {'order': order})
