@@ -5,11 +5,28 @@ from django.shortcuts import get_object_or_404, get_list_or_404, render
 
 from cart.cart import Cart
 from paystackapi.paystack import Paystack
-
+from django.urls import reverse_lazy
+from django.core.mail import send_mail
 from .forms import OrderCreateForm
 from .models import Order, OrderItem
 from .tasks import order_created
 from .utils import create_order_items
+
+def order_created(order_id, tx_ref):
+    """
+    Task to send an e-mail notification when an order is
+    successfully created.
+    """
+    order = Order.objects.get(id=order_id, tx_ref=tx_ref)
+    download_url = "http://dlearn.tk{}".format(reverse_lazy(
+        "orders:order_detail", kwargs={'order_id': order_id, 'tx_ref': tx_ref}))
+    subject = 'Order nr. {}'.format(order.id)
+    message = 'Dear {},\n\nYou have successfully placed an order.\
+    Your order id is {}.\n\nClick on the link below to download \
+    your resource. \n\n {}'.format(order.first_name, order.id, download_url)
+    mail_sent = send_mail(subject, message, 'snpet.hub@gmail.com', [order.email])
+
+    return mail_sent
 
 
 def order_create(request):
@@ -25,6 +42,7 @@ def order_create(request):
 
             ctx['order'] = order
             ctx['cart'] = cart
+            order_created(order.id, order.tx_ref)
             order_created.delay(order.id, order.tx_ref)
 
             return render(request, 'orders/order/created.html', ctx)
@@ -67,6 +85,7 @@ def confirm_payment(request, order_id):
             # clear the cart
             cart.clear()
             # launch asynchronous task
+            order_created(order.id, order.tx_ref)
             order_created.delay(order.id, order.tx_ref)
             return render(request, 'orders/order/done.html',
                           {'order': order})
