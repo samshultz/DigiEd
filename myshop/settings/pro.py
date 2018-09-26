@@ -29,7 +29,7 @@ PAYSTACK_PUBLIC_KEY = os.environ.get("PAYSTACK_PUBLIC_KEY")
 
 # Email settings
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'noreply@gmail.com'
+EMAIL_HOST_USER = 'snpet.hub@gmail.com'
 EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
