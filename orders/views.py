@@ -9,7 +9,7 @@ from paystackapi.paystack import Paystack
 from .forms import OrderCreateForm
 from .models import Order, OrderItem
 from .tasks import order_created
-from .utils import create_order_items
+from .utils import create_order_items, order_created
 
 
 def order_create(request):
@@ -25,6 +25,7 @@ def order_create(request):
 
             ctx['order'] = order
             ctx['cart'] = cart
+            order_created(order.id, order.tx_ref)
             order_created.delay(order.id, order.tx_ref)
 
             return render(request, 'orders/order/created.html', ctx)
@@ -67,6 +68,7 @@ def confirm_payment(request, order_id):
             # clear the cart
             cart.clear()
             # launch asynchronous task
+            order_created(order.id, order.tx_ref)
             order_created.delay(order.id, order.tx_ref)
             return render(request, 'orders/order/done.html',
                           {'order': order})
