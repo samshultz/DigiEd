@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>{% block title %}{% endblock title %}</title>
+<title>{% block title %}DLearn - PDFs and videos for Digital Learning{% endblock title %}</title>
 <!-- for-mobile-apps -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -37,9 +37,12 @@
  new WOW().init();
 </script>
 <!-- //animation-effect -->
+{% block meta %}
+    
+{% endblock meta %}
 {% block opengraph %}
   <meta property="og:type"          content="website" />
-  <meta property="og:description"   content="A website to get digital products such as PDF to learn programming or any form of technology" />
+  <meta property="og:description"   content="dlearn is a website to get digital products such as PDF to learn programming or any form of technology through books or videos" />
 {% endblock opengraph %}
 </head>
 	

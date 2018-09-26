@@ -3,10 +3,16 @@
 {% load static %} 
 {% load ratings %} 
 {% load daguerre %}
-{% block title %} {{ book.title|truncatechars:"30" }} by {{ book.author }} | Digital Learning
-{% endblock title %} {% block content %}
+{% block title %} {{ book.title|truncatechars:"30" }} by {{ book.author }} | {{ block.super }}                                                                       
+{% endblock title %} 
+{% block meta %}
+    <meta name="title" content="{{ book.title }} by {{ book.author }}">
+    <meta name="description" content="{{ book.description|truncatechars:"155" }}">
+{% endblock meta %}
+{% block content %}
 {% block opengraph %}
 <div id="fb-root"></div>
+
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
@@ -17,7 +23,7 @@
     <meta property="og:url"           content="{{ request.build_absolute_uri }}" />
     <meta property="og:type"          content="website" />
     <meta property="og:title"         content="{{ book.title }} by {{ book.author }}" />
-    <meta property="og:description"   content="{{ book.title }} {{ book.description|truncatewords:30 }}" />
+    <meta property="og:description"   content="{{ book.description|truncatewords:30 }}" />
     <meta property="og:image"         content="{% if book.image %}{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{{ book.image.url }}{% else %}{{ book.image_url }}{% endif %}" />
     <meta property="og:image:width" content="1200"/>
     <meta property="og:image:height" content="650"/>

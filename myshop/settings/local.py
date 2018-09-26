@@ -20,9 +20,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # elasticsearch settings
 FOUNDELASTICSEARCH_URL = "localhost:9200"
-HTTP_AUTH = os.environ.get("elastic:veOFdNEXM0ugmxJsgauaKrH1", None)
+HTTP_AUTH = os.environ.get("HTTP_AUTH", None)
 
-CELERY_BROKER_URL = "amqp://localhost"
 
 ROBOTS_SITEMAP_URLS = [
     '127.0.0.1:8000/sitemap.xml',
