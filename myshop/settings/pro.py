@@ -1,7 +1,7 @@
 import django_heroku
 from .base import *
 
-DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = ['dlearn.tk', 'www.dlearn.tk', "dlearn.herokuapp.com",
                  "www.dlearn.herokuapp.com"]
 
@@ -33,6 +33,7 @@ EMAIL_HOST_USER = 'snpet.hub@gmail.com'
 EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = "order@dlearn.com"
 
 django_heroku.settings(locals())
 
