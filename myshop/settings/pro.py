@@ -91,3 +91,10 @@ SOCIALACCOUNT_PROVIDERS = {
         'VERSION': 'v2.12',
     }
 }
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    # other finders..
+    'compressor.finders.CompressorFinder',
+)
