@@ -1,7 +1,7 @@
 import django_heroku
 from .base import *
 
-DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = ['dlearn.tk', 'www.dlearn.tk', "dlearn.herokuapp.com",
                  "www.dlearn.herokuapp.com"]
 
@@ -22,7 +22,6 @@ DATABASES = {
         'PASSWORD': os.environ.get("DATABASE_PWD"),
     }
 }
-COMPRESS_ENABLED = True
 # paystack
 PAYSTACK_SECRET_KEY = os.environ.get("PAYSTACK_SECRET_KEY")
 PAYSTACK_PUBLIC_KEY = os.environ.get("PAYSTACK_PUBLIC_KEY")
