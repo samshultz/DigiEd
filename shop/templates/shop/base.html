@@ -12,7 +12,7 @@
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 		function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- //for-mobile-apps -->
-{% compress css file main %}
+{% compress css %}
 <link href="{% static 'shop/css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all" />
 <link href="{% static 'shop/css/style.css' %}" rel="stylesheet" type="text/css" media="all" />
 <link href="{% static 'shop/css/animate.min.css' %}" rel="stylesheet"> 
@@ -24,7 +24,7 @@
 <!-- //timer -->
 {% endcompress %}
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-{% compress js file main %}
+{% compress js %}
 <!-- js -->
 <script src="{% static 'shop/js/jquery.min.js' %}"></script>
 <!-- //js -->
