@@ -1,7 +1,7 @@
 import django_heroku
 from .base import *
 
-DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = ['dlearn.tk', 'www.dlearn.tk', "dlearn.herokuapp.com",
                  "www.dlearn.herokuapp.com"]
 
@@ -86,9 +86,8 @@ SOCIALACCOUNT_PROVIDERS = {
             'last_name',
         ],
         'EXCHANGE_TOKEN': True,
-        'LOCALE_FUNC': 'path.to.callable',
         'VERIFIED_EMAIL': False,
-        'VERSION': 'v2.12',
+        
     }
 }
 
