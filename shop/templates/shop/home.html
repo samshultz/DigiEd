@@ -5,7 +5,8 @@
 {% load daguerre %}
 
 {% block meta %}
-   <meta name="description" content="dlearn is a website to get digital products such as PDF to learn programming or any form of technology through books or videos">
+	<meta name="keywords" content="DLearn,Learning,digital,ebooks,programming,Learn, Learn Programming,programming tutorial, Programming books">
+   <meta name="description" content="dlearn is a website to get books to help you learn programming and help improve your skill">
 {% endblock meta %}
 {% block content %}
     
@@ -74,7 +75,7 @@
 						
 					<div class="banner-bottom-grid-left-grid left1-grid grid-left-grid1">
 						<div class="banner-bottom-grid-left-grid1">
-							<img src="{% adjust discount.image 'fill' width=640 height=345 %}" alt="{{ discount.title }}" class="img-responsive" />
+							<img src="{% adjust discount.image 'fill' width=640 height=345 %}" alt="book with discount" class="img-responsive" />
 						</div>
 						<div class="banner-bottom-grid-left1-pos">
 							<p>Discount {{ discount.percent_discount }}%</p>
@@ -155,11 +156,11 @@
 		<div class="container">
 			<div class="collections-bottom-grids">
 				<div class="collections-bottom-grid animated wow slideInLeft" data-wow-delay=".5s">
-					<h3>Subscribe to our<span> Newsletter below</span></h3>
+					<h5 class="h3">Subscribe to our<span> Newsletter below</span></h4>
 				</div>
 			</div>
 			<div class="newsletter animated wow slideInUp" data-wow-delay=".5s">
-				<h3>Newsletter</h3>
+				<h4 class="h3">Newsletter</h4>
 				<p>Join us now to get all news and special offers.</p>
 				<form enctype="multipart/form-data" action="/newsletter/{{ newsletter }}/">
 					{% csrf_token %}
