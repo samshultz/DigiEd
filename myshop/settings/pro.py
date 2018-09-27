@@ -66,7 +66,6 @@ CELERY_BROKER_URL = os.environ.get("CLOUDAMQP_URL")
 CELERY_BROKER_POOL_LIMIT = 1
 CELERY_IMPORTS = ('orders.tasks',)
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-COMPRESS_ROOT = STATIC_ROOT
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 ROBOTS_SITEMAP_URLS = [
@@ -90,12 +89,3 @@ SOCIALACCOUNT_PROVIDERS = {
         
     }
 }
-
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    # other finders..
-    'compressor.finders.CompressorFinder',
-)
-
-COMPRESS_ENABLED = True

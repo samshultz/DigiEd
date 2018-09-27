@@ -1,5 +1,5 @@
 {% load static %}
-{% load compress %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,8 +12,8 @@
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 		function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- //for-mobile-apps -->
-{% compress css %}
-<link href="{% static 'shop/css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all" />
+
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 <link href="{% static 'shop/css/style.css' %}" rel="stylesheet" type="text/css" media="all" />
 <link href="{% static 'shop/css/animate.min.css' %}" rel="stylesheet"> 
 <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
@@ -22,9 +22,9 @@
 <!-- timer -->
 <link rel="stylesheet" href="{% static 'shop/css/jquery.countdown.css' %}" />
 <!-- //timer -->
-{% endcompress %}
+
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-{% compress js %}
+
 <!-- js -->
 <script src="{% static 'shop/js/jquery.min.js' %}"></script>
 <!-- //js -->
@@ -32,13 +32,13 @@
 <script src="{% static 'shop/js/simpleCart.min.js' %}"></script>
 <!-- cart -->
 <!-- for bootstrap working -->
-<script type="text/javascript" src="{% static 'shop/js/bootstrap-3.1.1.min.js' %}"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <!-- //for bootstrap working -->
 
 <!-- animation-effect -->
 
 <script src="{% static 'shop/js/wow.min.js' %}"></script>
-{% endcompress %}
+
 <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
 <link href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 
