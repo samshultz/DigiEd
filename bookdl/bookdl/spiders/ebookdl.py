@@ -45,3 +45,55 @@ class EbookdlSpider(scrapy.Spider):
             item['price'] = random.choice(price_list)
         
         return item
+
+
+class AllItebooksSpider(scrapy.Spider):
+    name = 'allitebooks'
+    allowed_domains = ['allitebooks.com']
+    start_urls = ['http://www.allitebooks.com/']
+
+    def parse(self, response):
+        for ebook in response.css("article > div:nth-child(2) > header:nth-child(1) > h2:nth-child(1) > a:nth-child(1)::attr(href)").extract():
+
+            yield response.follow(ebook, self.get_detail)
+
+        num_pages = int(response.css(".pages::text").extract_first().split()[2])
+        current_page = int(response.css(".current::text").extract_first())
+        if current_page < num_pages:
+            next_page = "http://www.allitebooks.com/page/{}/".format(current_page + 1)
+            yield response.follow(next_page, self.parse)
+
+    def get_detail(self, response):
+        # Don't forget to set the category
+        # don't forget to set the tags
+        categories = {'Datebases': "Databases & Big Data",
+                      'Web Development': "Web Development & Design", 
+                      'Administration': "Administration",
+                      'Computers & Technology': "Computer Science", 
+                      "Enterprise": "Enterprise",
+                      'Game Programming': "Games & Strategy Guides", 
+                      'Marketing & SEO': "Marketing & SEO",
+                      'Security': "Security & Encryption"}
+        item = BookdlItem()
+        cat = response.css(".book-detail > dl:nth-child(1) > dd:nth-child(16) > a:nth-child(1)::text").extract_first()
+        cat = categories.get(cat, cat)
+
+
+        price_list = [300, 500, 700]
+        
+        item['category'] = cat
+        item['title'] = response.css(".single-title::text").extract_first().strip()
+        item['author'] = response.css(".book-detail > dl:nth-child(1) > dd:nth-child(2) > a:nth-child(1)::text").extract_first().strip()
+        item['image_url'] = response.css(".attachment-post-thumbnail::attr(src)").extract_first().strip()
+        item['book_url'] = response.css("span.download-links:nth-child(1) > a:nth-child(1)::attr(href)").extract_first().strip()
+        item['description'] = response.css(".entry-content p::text").extract_first().strip()
+        item['year'] = response.css(".book-detail > dl:nth-child(1) > dd:nth-child(6)::text").extract_first().strip()
+        item['num_pages'] = response.css(".book-detail > dl:nth-child(1) > dd:nth-child(8)::text").extract_first().strip()
+        item['publisher'] = ""
+        item['isbn'] = response.css(".book-detail > dl:nth-child(1) > dd:nth-child(4)::text").extract_first().strip()
+        item['file_format'] = response.css(".book-detail > dl:nth-child(1) > dd:nth-child(14)::text").extract_first().strip()
+            
+        if int(item['num_pages']) > 300:
+            item['price'] = random.choice(price_list)
+        
+        return item
