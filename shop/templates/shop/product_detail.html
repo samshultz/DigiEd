@@ -7,6 +7,7 @@
 {% endblock title %} 
 {% block meta %}
     <meta name="title" content="{{ book.title }} by {{ book.author }}">
+    <meta name="keywords" content="{{ book.title }}, {{ book.author }}, {{ book.file_format }}, {{ book.isbn }}">
     <meta name="description" content="{{ book.description|truncatechars:"155" }}">
 {% endblock meta %}
 {% block content %}
