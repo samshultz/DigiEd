@@ -16,9 +16,9 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "*pgdt3h3ta7-i7!_*^(*&()*)*fdvsappmy0$
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'HOST': "ec2-107-22-221-60.compute-1.amazonaws.com",
-        'NAME': 'd6fk0t2sq5ul7i',
-        'USER': 'yvwgbarytxgwpa',
+        'HOST': "ec2-54-83-27-165.compute-1.amazonaws.com",
+        'NAME': 'd8ofac7claoi38',
+        'USER': 'pbopyrzbcncpra',
         'PASSWORD': os.environ.get("DATABASE_PWD"),
     }
 }
