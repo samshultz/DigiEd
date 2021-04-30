@@ -94,7 +94,7 @@ PyYAML==3.13
 queuelib==1.5.0
 requests==2.19.1
 requests-oauthlib==1.0.0
-rsa==3.4.2
+rsa==4.7
 s3transfer==0.1.13
 selenium==3.13.0
 service-identity==17.0.0
